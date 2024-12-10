@@ -1,6 +1,9 @@
-# Facebook CRM
-Facebook CRM is a FastAPI-based commercial chatbot application for interacting with clients and recording their requests.
-In the future, it will be equipped with an integrated LLM model to benefit from AI-based response and conversation.
+# CRM Chatbot
+CRM Chatbot is a FastAPI-based commercial chatbot application that interacts with clients and records their requests on 
+different types of messengers (e.g., Meta messenger, Telegram Messenger, etc.)
+
+At first, it will be designed to operate on Meta's Messenger.
+It will be equipped with an integrated LLM model to benefit from AI-based response and conversation.
 
 It is designed to deploy on AWS infrastructure to ensure scalability, durability, and availability.
 
