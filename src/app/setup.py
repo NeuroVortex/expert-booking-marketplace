@@ -3,32 +3,14 @@ import logging
 from decimal import getcontext
 from typing import Type
 
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from fastapi import FastAPI
-from kink import inject
-
-from common.Contract.Logger import ICustomLogger
-from common.MessageBroker.IConsumer import IConsumer
-from .Application.Trade.Subscriber.TradeSubscriber import TradeSubscriber
-from .bootstrap import Bootstrap
-from src.Application.Agents.ActorSystem import ActorSystem
-from src.Application.Agents.Manager.Manager import Manager
-from src.Application.AppSetting import AppSetting
-from common.Logger import AdvancedLogger
-from common.MessageBroker.KafkaClient.KafkaConsumer import KafkaConsumer
-from common.MessageBroker.NatsClient import NatsClient
-from src.Application.Time import Timer
-from src.Infrastructure.DbManager.DatabaseManagement import AsyncDatabaseManager
-from src.Infrastructure.DbManager.DbChecker import DBChecking
-from src.Services.CopyService.dependencies.dependecies import Dependencies
-from src.settings import Registered_Models, Routers, DECIMAL_PRECISION, DECIMAL_ROUNDING
-from src.settings import EXECUTORS, JOB_DEFAULTS
+from .settings import Registered_Models, Routers, DECIMAL_PRECISION, DECIMAL_ROUNDING
+from ..infrastructure.db_manager.db_management import AsyncDatabaseManager
 
 
 @inject
 class Setup:
     db_manager: AsyncDatabaseManager | None = None
-    consumer: IConsumer | None = None
     actor_system: ActorSystem = None
     time_scheduler: AsyncIOScheduler = None
     timer: Timer = None
@@ -57,6 +39,10 @@ class Setup:
         Setup.timer = Timer(scheduler=Setup.time_scheduler)
         Setup.time_scheduler.start()
 
+    def __setup_front_handlers(self):
+        self.app.add_middleware(
+
+        )
     @classmethod
     def shutdown_timer(cls):
         Setup.timer.shutdown()
