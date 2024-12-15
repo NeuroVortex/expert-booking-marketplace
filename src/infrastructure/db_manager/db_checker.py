@@ -1,7 +1,7 @@
 from sqlalchemy import inspect
 
-from src.Infrastructure.DbManager.DatabaseManagement import AsyncDatabaseManager
-from src.Infrastructure.DbManager.Exception.DatabaseDoesNotExist import DatabaseDoesNotExist
+from src.infrastructure.db_manager.db_management import AsyncDatabaseManager
+from src.infrastructure.db_manager.exception.db_exception import DatabaseDoesNotExist
 
 
 class DBChecking:

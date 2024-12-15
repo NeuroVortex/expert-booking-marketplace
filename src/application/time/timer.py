@@ -1,14 +1,14 @@
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
-from src.Application.Agents.Messages.Time import TimeSignal
-from common.Contract.Logger import ICustomLogger
 from apscheduler.job import Job
 from datetime import datetime
 from kink import inject
 import pykka
 import pytz
 
-from common.Contract.Time import TimeMode
-from src.Application.AppSetting import AppSetting
+from src.agents.messages.time.signal import TimeSignal
+from src.application.app_settings import AppSetting
+from src.shared.logger.logger_interface import ICustomLogger
+from src.shared.time.mode import TimeMode
 
 
 @inject

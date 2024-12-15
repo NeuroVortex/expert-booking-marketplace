@@ -1,4 +1,3 @@
-import asyncio
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -7,12 +6,17 @@ from fastapi.exceptions import RequestValidationError
 from starlette import status
 from starlette.requests import Request
 from starlette.responses import JSONResponse
-
+from src.services.sales.dependencies.dependencies import Dependencies
+from src.application.app_settings import AppSetting
+from src.bootstrap import Bootstrap
 
 
 @asynccontextmanager
 async def lifespan(fast_api_app: FastAPI):
-    from app.setup import Setup
+    AppSetting()
+    Bootstrap()
+    Dependencies()
+    from src.setup import Setup
     await Setup(app=fast_api_app).setup()
 
     yield
@@ -21,9 +25,9 @@ async def lifespan(fast_api_app: FastAPI):
 
 app = FastAPI(lifespan=lifespan, docs_url="/swagger")
 
-app.add_middleware(
-
-)
+# app.add_middleware(
+#
+# )
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
     return JSONResponse(

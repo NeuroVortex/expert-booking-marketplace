@@ -4,6 +4,7 @@ import asyncio
 import pykka
 
 from src.agents.messages.system.start_command import StartSystemCommand
+from src.application.time.timer import Timer
 
 
 class ActorSystem:

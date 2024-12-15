@@ -1,11 +1,20 @@
 import asyncio
 import logging
 from decimal import getcontext
-from typing import Type
 
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from fastapi import FastAPI
-from .settings import Registered_Models, Routers, DECIMAL_PRECISION, DECIMAL_ROUNDING
-from ..infrastructure.db_manager.db_management import AsyncDatabaseManager
+from kink import inject
+
+from src.agents.actor_system import ActorSystem
+from src.application.app_settings import AppSetting
+from src.application.time.timer import Timer
+from src.infrastructure.db_manager.db_checker import DBChecking
+from src.services.sales.dependencies.dependencies import Dependencies
+from src.settings import Registered_Models, Routers, DECIMAL_PRECISION, DECIMAL_ROUNDING, EXECUTORS, JOB_DEFAULTS, \
+    Middleware, Middleware_rules
+from src.infrastructure.db_manager.db_management import AsyncDatabaseManager
+from src.shared.logger.logger_interface import ICustomLogger
 
 
 @inject
@@ -16,18 +25,16 @@ class Setup:
     timer: Timer = None
     loop: asyncio.AbstractEventLoop = None
 
-    def __init__(self, logger: ICustomLogger, consumer: IConsumer, app: FastAPI, debug=False):
+    def __init__(self, logger: ICustomLogger, app: FastAPI, debug=False):
         self.app = app
         self.__logger: ICustomLogger = logger
-        self.__consumer: IConsumer = consumer
         self.__debug = debug
 
     async def setup(self):
         self.__setup_logger()
-        await self.configure_db()
+        # await self.configure_db()
         await self.config_routes()
-        await self.config_msg_brokers()
-        self.__run()
+        # self.__run()
 
     def __setup_logger(self):
         self.__configure_logging()
@@ -40,9 +47,8 @@ class Setup:
         Setup.time_scheduler.start()
 
     def __setup_front_handlers(self):
-        self.app.add_middleware(
+        self.app.add_middleware(middleware_class=Middleware, kwargs=Middleware_rules)
 
-        )
     @classmethod
     def shutdown_timer(cls):
         Setup.timer.shutdown()
@@ -58,9 +64,6 @@ class Setup:
             await self.db_manager.create_all_tables(Registered_Models)
 
         Setup.DbEngine = self.db_manager.ENGINE
-
-    async def config_msg_brokers(self):
-        Setup.consumer = self.__consumer
 
     async def config_routes(self):
         for router in Routers:
