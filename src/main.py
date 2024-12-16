@@ -4,16 +4,16 @@ from fastapi import FastAPI
 from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import RequestValidationError
 from starlette import status
+from starlette.middleware.cors import CORSMiddleware
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 from src.services.sales.dependencies.dependencies import Dependencies
-from src.application.app_settings import AppSetting
 from src.bootstrap import Bootstrap
+from src.settings import Allowed_Origins, Allowed_Methods, Allowed_Headers, Allow_Credentials
 
 
 @asynccontextmanager
 async def lifespan(fast_api_app: FastAPI):
-    AppSetting()
     Bootstrap()
     Dependencies()
     from src.setup import Setup
@@ -24,10 +24,12 @@ async def lifespan(fast_api_app: FastAPI):
     Setup.shutdown_timer()
 
 app = FastAPI(lifespan=lifespan, docs_url="/swagger")
+app.add_middleware(CORSMiddleware,
+                   allow_origins=Allowed_Origins,
+                   allow_credentials=Allow_Credentials,
+                   allow_methods=Allowed_Methods,
+                   allow_headers=Allowed_Headers)
 
-# app.add_middleware(
-#
-# )
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
     return JSONResponse(

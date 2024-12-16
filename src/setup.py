@@ -5,6 +5,7 @@ from decimal import getcontext
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from fastapi import FastAPI
 from kink import inject
+from starlette.middleware.cors import CORSMiddleware
 
 from src.agents.actor_system import ActorSystem
 from src.application.app_settings import AppSetting
@@ -12,7 +13,7 @@ from src.application.time.timer import Timer
 from src.infrastructure.db_manager.db_checker import DBChecking
 from src.services.sales.dependencies.dependencies import Dependencies
 from src.settings import Registered_Models, Routers, DECIMAL_PRECISION, DECIMAL_ROUNDING, EXECUTORS, JOB_DEFAULTS, \
-    Middleware, Middleware_rules
+    Allowed_Origins, Allowed_Headers, Allow_Credentials, Allowed_Methods
 from src.infrastructure.db_manager.db_management import AsyncDatabaseManager
 from src.shared.logger.logger_interface import ICustomLogger
 
@@ -45,9 +46,6 @@ class Setup:
         Setup.time_scheduler = AsyncIOScheduler(executors=EXECUTORS, job_defaults=JOB_DEFAULTS)
         Setup.timer = Timer(scheduler=Setup.time_scheduler)
         Setup.time_scheduler.start()
-
-    def __setup_front_handlers(self):
-        self.app.add_middleware(middleware_class=Middleware, kwargs=Middleware_rules)
 
     @classmethod
     def shutdown_timer(cls):

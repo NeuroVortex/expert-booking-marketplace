@@ -8,12 +8,16 @@ from src.app.config import Router
 from src.app.router.app import app_router
 from src.services.sales.routers.service import service_router
 
-Middleware=CORSMiddleware
-Middleware_rules = {
-    "allow_origins": ["*"],
-    "allow_methods": ["*"],
-    "allow_headers": ["*"],
-}
+AppSetting()
+Allowed_Origins = [
+    "http://localhost.com",
+    "http://localhost",
+    "http://localhost:5173",
+    "http://localhost:5173"
+]
+Allow_Credentials = True
+Allowed_Methods = ["*"]
+Allowed_Headers = ["*"]
 
 Registered_Models = [
     # TraderModel,

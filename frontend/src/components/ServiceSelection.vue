@@ -1,28 +1,37 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { availableServices } from '../data/services';
+import { ref, onMounted } from 'vue';
+import { fetchServices } from '../data/services';
 import type { Service } from '../types';
 
 const emit = defineEmits(['next', 'updateServices']);
 
-const services = ref<Service[]>(availableServices);
+const services = ref<Service[]>([]);
+const loading = ref(true);
 
 const toggleService = (service: Service) => {
   service.selected = !service.selected;
-  emit('updateServices', services.value.filter(s => s.selected));
+  emit('updateServices', services.value.filter((s) => s.selected));
 };
 
 const handleNext = () => {
-  if (services.value.some(service => service.selected)) {
+  if (services.value.some((service) => service.selected)) {
     emit('next');
   }
 };
+
+// Fetch services when the component is mounted
+onMounted(async () => {
+  services.value = await fetchServices();
+  console.log('Fetched services:', services.value);
+  loading.value = false;
+});
 </script>
 
 <template>
   <div class="service-selection">
     <h2>Select Services</h2>
-    <div class="services-grid">
+    <div v-if="loading" class="loading-indicator">Loading services...</div>
+    <div v-else class="services-grid">
       <div
         v-for="service in services"
         :key="service.id"
@@ -31,6 +40,7 @@ const handleNext = () => {
         @click="toggleService(service)"
       >
         <h3>{{ service.name }}</h3>
+        <p>{{ service.description }}</p>
         <p>Duration: {{ service.duration }} min</p>
         <p>Price: ${{ service.price }}</p>
       </div>
@@ -38,7 +48,7 @@ const handleNext = () => {
     <div class="button-container">
       <button
         @click="handleNext"
-        :disabled="!services.some(service => service.selected)"
+        :disabled="!services.length || !services.some((service) => service.selected)"
         class="next-button"
       >
         Next
