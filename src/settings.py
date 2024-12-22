@@ -1,11 +1,14 @@
 import logging
 from decimal import ROUND_DOWN
+from sys import prefix
+
 from fastapi.middleware.cors import CORSMiddleware
 from apscheduler.executors.pool import ThreadPoolExecutor, ProcessPoolExecutor
 
 from src.application.app_settings import AppSetting
 from src.app.config import Router
 from src.app.router.app import app_router
+from src.services.crm.routers.appointment_routers import appointment_router
 from src.services.sales.routers.service import service_router
 
 AppSetting()
@@ -29,6 +32,7 @@ Registered_Models = [
 Routers = [
     Router(prefix="", router=app_router, tags=["/"]),
     Router(prefix='/v1/services', router=service_router, tags=["Service"]),
+    Router(prefix='/v1/appointments', router=appointment_router, tags=["Appointment"]),
 ]
 
 EXECUTORS = {
