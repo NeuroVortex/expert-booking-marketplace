@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { generateTimeSlots, getCurrentDate } from '../utils/timeUtils';
+import { fetchSchedules, getCurrentDate } from '../utils/timeUtils';
 import type { TimeSlot } from '../types';
 
 const emit = defineEmits(['back', 'submit']);
@@ -9,8 +9,9 @@ const selectedDate = ref(getCurrentDate());
 const selectedTime = ref('');
 const timeSlots = ref<TimeSlot[]>([]);
 
-const updateTimeSlots = () => {
-  timeSlots.value = generateTimeSlots();
+const updateTimeSlots = async () => {
+  console.log("Selected Date", selectedDate.value.toString())
+  timeSlots.value = await fetchSchedules(selectedDate.value.toString());
 };
 
 onMounted(() => {

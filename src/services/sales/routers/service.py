@@ -7,7 +7,7 @@ from src.services.sales.routers.serializer.service_model import ServiceModel
 service_router = APIRouter()
 
 
-@service_router.post(path="/add", tags=["service"], status_code=status.HTTP_200_OK)
+@service_router.post(path="/add", tags=["Service"], status_code=status.HTTP_200_OK)
 async def add_service(service: ServiceModel) -> ServiceAddedSuccessfully:
     try:
         service_dto = service @ ToServiceDto()
@@ -16,7 +16,7 @@ async def add_service(service: ServiceModel) -> ServiceAddedSuccessfully:
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@service_router.get(path="", tags=["service"], status_code=status.HTTP_200_OK)
+@service_router.get(path="", tags=["Service"], status_code=status.HTTP_200_OK)
 async def get_services() -> GetServices:
     try:
         services = [{"id": 1, "title": 'HVAC', "duration": "30", "description": "HVAC" ,

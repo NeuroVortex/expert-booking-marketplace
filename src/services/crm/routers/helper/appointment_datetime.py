@@ -1,5 +1,7 @@
 import random
 
+from src.services.crm.routers.responses.response import Appointment
+
 
 class AppointmentDateTime:
 
@@ -9,4 +11,7 @@ class AppointmentDateTime:
 
         for i in range(9, 17):
             for j in range(0, 60, 30):
-                date_times.append({"time": f"{i}".zfill(2) + ":" + f"{j}".zfill(2), "available": 0.3 > random.random()})
+                date_times.append(Appointment(time=f"{i}".zfill(2) + ":" + f"{j}".zfill(2),
+                                              available=0.3 > random.random()))
+
+        return date_times
