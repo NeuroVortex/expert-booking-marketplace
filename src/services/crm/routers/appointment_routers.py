@@ -5,6 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException, status, Body, Query
 
 from src.services.crm.routers.helper.appointment_datetime import AppointmentDateTime
 from src.services.crm.routers.responses.response import Schedules
+from src.services.crm.routers.serializers.appointment import Appointment
 from src.services.sales.routers.dto.service_extensions import ToServiceDto
 from src.services.sales.routers.response.responses import ServiceAddedSuccessfully, GetServices, GetService
 from src.services.sales.routers.serializer.service_model import ServiceModel
@@ -13,7 +14,7 @@ appointment_router = APIRouter()
 
 
 @appointment_router.post(path="/add", tags=["Crm"], status_code=status.HTTP_200_OK)
-async def add_service(service: ServiceModel) -> ServiceAddedSuccessfully:
+async def add_service(appointment: Appointment) -> int:
     try:
         service_dto = service @ ToServiceDto()
         return ServiceAddedSuccessfully(id=1)

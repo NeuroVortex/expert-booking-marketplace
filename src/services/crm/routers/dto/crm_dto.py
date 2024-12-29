@@ -10,3 +10,7 @@ class ToServiceDto:
                           description=service_model.Description,
                           price=Decimal(service_model.Price),
                           duration=service_model.Duration)
+
+class ToAppointmentDto:
+    def __rmatmul__(self, service_model: ServiceModel):
+        return
