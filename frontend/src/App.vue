@@ -21,7 +21,7 @@ const handleUserInfoUpdate = (info: UserInfo) => {
 const handleAppointmentSubmit = (dateTime: TimeSlot) => {
   appointmentDateTime.value = dateTime;
   // Here you would typically make an API call to save the appointment
-  alert('Appointment scheduled successfully!');
+  alert('AppointmentModel scheduled successfully!');
 };
 
 const switchTab = (tabNumber: number) => {

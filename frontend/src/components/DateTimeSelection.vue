@@ -77,7 +77,7 @@ const handleSubmit = () => {
         :disabled="!selectedDate || !selectedTime"
         @click="handleSubmit"
       >
-        Submit Appointment
+        Submit AppointmentModel
       </button>
     </div>
   </div>

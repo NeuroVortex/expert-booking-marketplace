@@ -32,7 +32,7 @@ Registered_Models = [
 Routers = [
     Router(prefix="", router=app_router, tags=["/"]),
     Router(prefix='/v1/services', router=service_router, tags=["Service"]),
-    Router(prefix='/v1/appointments', router=appointment_router, tags=["Appointment"]),
+    Router(prefix='/v1/appointments', router=appointment_router, tags=["AppointmentModel"]),
 ]
 
 EXECUTORS = {

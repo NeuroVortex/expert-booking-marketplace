@@ -1,28 +1,29 @@
 from datetime import datetime, date
-from typing import Annotated
+from pydantic import BaseModel, ValidationError
 
-from fastapi import APIRouter, Depends, HTTPException, status, Body, Query
+from fastapi import APIRouter, HTTPException, status, Query
 
+from src.services.crm.routers.dto.crm_dto import ToAppointmentDto
 from src.services.crm.routers.helper.appointment_datetime import AppointmentDateTime
 from src.services.crm.routers.responses.response import Schedules
-from src.services.crm.routers.serializers.appointment import Appointment
-from src.services.sales.routers.dto.service_extensions import ToServiceDto
-from src.services.sales.routers.response.responses import ServiceAddedSuccessfully, GetServices, GetService
-from src.services.sales.routers.serializer.service_model import ServiceModel
+from src.services.crm.routers.serializers.appointmentmodel import AppointmentModel
 
 appointment_router = APIRouter()
 
 
 @appointment_router.post(path="/add", tags=["Crm"], status_code=status.HTTP_200_OK)
-async def add_service(appointment: Appointment) -> int:
+async def add_service(appointment: AppointmentModel) -> int:
     try:
-        service_dto = service @ ToServiceDto()
-        return ServiceAddedSuccessfully(id=1)
+        appointment_dto = appointment @ ToAppointmentDto()
+        return 1
+
+    except ValidationError as e:
+        print(e)
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@appointment_router.get(path="", tags=["Appointment"], status_code=status.HTTP_200_OK)
+@appointment_router.get(path="", tags=["AppointmentModel"], status_code=status.HTTP_200_OK)
 async def get_schedules(current_datetime: date | datetime = Query(str(datetime.now().isoformat()))) -> Schedules:
 
     try:

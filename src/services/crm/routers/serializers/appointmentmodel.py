@@ -3,7 +3,7 @@ from datetime import datetime
 from .client import Client
 
 
-class Appointment(BaseModel):
+class AppointmentModel(BaseModel):
     client: Client
     datetime: datetime
     selectedServices: list[int]
