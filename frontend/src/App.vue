@@ -6,9 +6,9 @@ import DateTimeSelection from './components/DateTimeSelection.vue';
 import { Service, TimeSlot, UserInfo } from './types';
 
 const currentTab = ref(1);
-const selectedServices = ref([]);
+const selectedServices = ref();
 const userInfo = ref({});
-const appointmentDateTime = ref(null);
+const appointmentDateTime = ref();
 
 const handleServiceUpdate = (services: Service) => {
   selectedServices.value = services;
@@ -18,10 +18,24 @@ const handleUserInfoUpdate = (info: UserInfo) => {
   userInfo.value = info;
 };
 
+const sendData = () => {
+  const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "timeSlot": appointmentDateTime.value,
+        "userInfo": userInfo,
+        "services": selectedServices.value
+      })
+  };
+  fetch('https://testapi.jasonwatmore.com/products', requestOptions).
+    then(() => alert('AppointmentModel scheduled successfully!')).
+    catch(() => alert('AppointmentModel scheduled Unsuccessfully!'))
+};
+
 const handleAppointmentSubmit = (dateTime: TimeSlot) => {
   appointmentDateTime.value = dateTime;
-  // Here you would typically make an API call to save the appointment
-  alert('AppointmentModel scheduled successfully!');
+  sendData();
 };
 
 const switchTab = (tabNumber: number) => {

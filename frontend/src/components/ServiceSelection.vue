@@ -19,7 +19,7 @@ const handleNext = () => {
   }
 };
 
-// Fetch services when the component is mounted
+// Fetch services and ensure data structure
 onMounted(async () => {
   services.value = await fetchServices();
   console.log('Fetched services:', services.value);
@@ -60,6 +60,13 @@ onMounted(async () => {
 <style scoped>
 .service-selection {
   padding: 20px;
+}
+
+.loading-indicator {
+  text-align: center;
+  font-size: 18px;
+  color: #999;
+  margin: 20px 0;
 }
 
 .services-grid {

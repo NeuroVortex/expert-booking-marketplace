@@ -9,8 +9,12 @@ export interface Service {
 
 export interface UserInfo {
   name: string;
+  familyName: string;
   email: string;
   phone: string;
+  address: Text;
+  nationalCode: string;
+  zipCode: string;
 }
 
 export interface TimeSlot {

@@ -61,6 +61,17 @@ const handleNext = () => {
         >
       </div>
 
+      <div class="form-group">
+        <label for="user_id">Id Number</label>
+        <input
+          id="user_id"
+          v-model="userInfo.email"
+          type="text"
+          required
+          placeholder="Enter your email"
+        >
+      </div>
+
       <div class="button-container">
         <button type="button" class="back-button" @click="emit('back')">
           Back
