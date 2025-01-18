@@ -8,4 +8,4 @@ class Client(BaseModel):
     phone: str
     address: str
     zip_code: str
-    national_code: str
+    identity_code: str

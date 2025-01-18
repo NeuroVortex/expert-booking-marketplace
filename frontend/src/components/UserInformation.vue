@@ -6,8 +6,12 @@ const emit = defineEmits(['next', 'back', 'updateUserInfo']);
 
 const userInfo = ref<UserInfo>({
   name: '',
+  familyName: '',
   email: '',
   phone: '',
+  address: '',
+  identityCode: '',
+  zipCode: ''
 });
 
 const isFormValid = computed(() => {
@@ -65,10 +69,32 @@ const handleNext = () => {
         <label for="user_id">Id Number</label>
         <input
           id="user_id"
-          v-model="userInfo.email"
+          v-model="userInfo.identityCode"
           type="text"
           required
-          placeholder="Enter your email"
+          placeholder="Enter your Identity Number"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="Address">Address</label>
+        <input
+          id="address"
+          v-model="userInfo.address"
+          type="text"
+          required
+          placeholder="Enter your address"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="zip_code">Id Number</label>
+        <input
+          id="zip_code"
+          v-model="userInfo.zipCode"
+          type="text"
+          required
+          placeholder="Enter your zip code"
         >
       </div>
 

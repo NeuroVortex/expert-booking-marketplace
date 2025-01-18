@@ -12,8 +12,8 @@ export interface UserInfo {
   familyName: string;
   email: string;
   phone: string;
-  address: Text;
-  nationalCode: string;
+  address: string;
+  identityCode: string;
   zipCode: string;
 }
 

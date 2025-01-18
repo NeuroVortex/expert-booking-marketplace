@@ -12,7 +12,7 @@ appointment_router = APIRouter()
 
 
 @appointment_router.post(path="/add", tags=["Crm"], status_code=status.HTTP_200_OK)
-async def set_1_appointment(appointment: AppointmentModel) -> int:
+async def set_1_appointment(appointment: dict) -> int:
     try:
         appointment_dto = appointment @ ToAppointmentDto()
         return 1

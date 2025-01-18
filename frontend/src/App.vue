@@ -23,16 +23,31 @@ const sendData = () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
+        "client": userInfo.value,
         "timeSlot": appointmentDateTime.value,
-        "userInfo": userInfo,
+        "userInfo": userInfo.value,
         "services": selectedServices.value
       })
   };
-  fetch('https://testapi.jasonwatmore.com/products', requestOptions).
-    then(() => alert('AppointmentModel scheduled successfully!')).
-    catch(() => alert('AppointmentModel scheduled Unsuccessfully!'))
+  fetch('http://127.0.0.1:8000/v1/appointments/add', requestOptions).
+    then(() => alert('Appointment scheduled successfully!')).
+    catch(() => alert('Appointment scheduled Unsuccessfully!'))
 };
 
+// "client": {
+//     "name": "string",
+//     "family_name": "string",
+//     "email": "string",
+//     "phone": "string",
+//     "address": "string",
+//     "zip_code": "string",
+//     "national_code": "string"
+//   },
+//   "datetime": "2025-01-05T13:15:48.426Z",
+//   "selectedServices": [
+//     0
+//   ],
+//   "description": "string"
 const handleAppointmentSubmit = (dateTime: TimeSlot) => {
   appointmentDateTime.value = dateTime;
   sendData();
