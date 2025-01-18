@@ -26,3 +26,7 @@ export interface AppointmentDateTime {
   date: string;
   time: string;
 }
+
+export interface UserDescription {
+  description: string;
+}

@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { fetchServices } from '../data/services';
-import type { Service } from '../types';
+import type { Service, UserDescription } from '../types';
 
 const emit = defineEmits(['next', 'updateServices']);
 
 const services = ref<Service[]>([]);
 const loading = ref(true);
+const userDescription = ref<UserDescription>({
+  description:""
+});
 
 const toggleService = (service: Service) => {
   service.selected = !service.selected;
@@ -44,6 +47,17 @@ onMounted(async () => {
         <p>Duration: {{ service.duration }} min</p>
         <p>Price: ${{ service.price }}</p>
       </div>
+    </div>
+    <div class="service-description">
+      <textarea 
+      v-model="userDescription.description" 
+      placeholder="Please describe about your requests (max. 500 characters)" 
+      size="large"
+      style="resize: true"
+      variant="filled"
+      rows="6" cols="30" 
+      :maxlength="500"
+      ></textarea>
     </div>
     <div class="button-container">
       <button
@@ -111,5 +125,13 @@ onMounted(async () => {
 .next-button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+.service-description {
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 </style>
