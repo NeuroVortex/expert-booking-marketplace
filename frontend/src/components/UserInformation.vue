@@ -33,16 +33,27 @@ const handleNext = () => {
     <h2>Personal Information</h2>
     <form @submit.prevent="handleNext" class="info-form">
       <div class="form-group">
-        <label for="name">Full Name</label>
+        <label for="first-name">First Name</label>
         <input
           id="name"
           v-model="userInfo.name"
           type="text"
           required
-          placeholder="Enter your full name"
+          placeholder="Enter your first name"
         >
       </div>
       
+      <div class="form-group">
+        <label for="last-name">Last Name</label>
+        <input
+          id="name"
+          v-model="userInfo.name"
+          type="text"
+          required
+          placeholder="Enter your last name"
+        >
+      </div>
+
       <div class="form-group">
         <label for="email">Email</label>
         <input
@@ -79,12 +90,42 @@ const handleNext = () => {
       <div class="form-group">
         <label for="Address">Address</label>
         <input
+          id="street-address"
+          v-model="userInfo.address"
+          type="text"
+          required
+          placeholder="Enter your address"
+        >
+        <input
           id="address"
           v-model="userInfo.address"
           type="text"
           required
           placeholder="Enter your address"
         >
+        <input
+          id="address"
+          v-model="userInfo.address"
+          type="text"
+          required
+          placeholder="Enter your address"
+        >
+        <div class="form-group">
+          <input
+          id="city"
+          v-model="userInfo.address"
+          type="text"
+          required
+          placeholder="Enter your city"
+        >
+        <input
+          id="state/province"
+          v-model="userInfo.address"
+          type="text"
+          required
+          placeholder="Enter your state/province"
+        >
+        </div>
       </div>
 
       <div class="form-group">
