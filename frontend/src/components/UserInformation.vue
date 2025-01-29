@@ -86,9 +86,17 @@ const handleNext = () => {
           placeholder="Enter your Identity Number"
         >
       </div>
-
       <div class="form-group">
-        <label for="Address">Address</label>
+        <label for="City">Street</label>
+        <input
+          id="street-address"
+          v-model="userInfo.address"
+          type="text"
+          required
+          placeholder="Enter your City"
+        >
+      <div class="form-group">
+        <label for="Street">Street</label>
         <input
           id="street-address"
           v-model="userInfo.address"
