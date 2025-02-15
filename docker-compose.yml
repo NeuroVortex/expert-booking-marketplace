@@ -1,0 +1,20 @@
+version: '3.8'
+
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: service_booking_bot
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "3432:5432"
+
+volumes:
+  postgres_data:
+    driver: local

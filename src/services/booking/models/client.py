@@ -3,7 +3,7 @@ from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.sql import func
 
 from src.infrastructure.db_manager.sql_alchemy.base import BaseModel
-from src.services.crm.contract.client import Client
+from src.services.booking.contract.client import Client
 
 
 class UserModel(BaseModel):

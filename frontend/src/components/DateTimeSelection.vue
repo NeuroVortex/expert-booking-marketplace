@@ -77,7 +77,7 @@ const handleSubmit = () => {
         :disabled="!selectedDate || !selectedTime"
         @click="handleSubmit"
       >
-        Submit AppointmentModel
+        Submit Your Reservation
       </button>
     </div>
   </div>
@@ -127,6 +127,7 @@ const handleSubmit = () => {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
+  gap: 8px;
 }
 
 .back-button {

@@ -7,14 +7,24 @@ export interface Service {
   selected: boolean;
 }
 
-export interface UserInfo {
-  name: string;
-  familyName: string;
+export interface User{
+  firstName: string;
+  lastName: string;
   email: string;
   phone: string;
-  address: string;
-  identityCode: string;
+  identityNumber: string;
+}
+export interface Address {
+  province: string;
+  city: string;
+  firstAddressLine: string;
+  secondAddressLine: string | null;
+  homeNumber: string;
   zipCode: string;
+}
+export interface UserInfo {
+  personalInfo: User;
+  address: Address;
 }
 
 export interface TimeSlot {

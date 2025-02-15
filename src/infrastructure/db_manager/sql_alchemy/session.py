@@ -1,7 +1,6 @@
-from sqlalchemy import exc
 from sqlalchemy.ext.asyncio import async_sessionmaker
 
-from src.Infrastructure.DbManager.DatabaseManagement import AsyncDatabaseManager
+from src.infrastructure.db_manager.db_management import AsyncDatabaseManager
 
 
 class AsyncDatabaseSessionManager:

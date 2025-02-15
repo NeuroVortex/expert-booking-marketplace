@@ -1,6 +1,6 @@
 import random
 
-from src.services.crm.routers.responses.response import Appointment
+from src.services.booking.routers.responses.response import Appointment
 
 
 class AppointmentDateTime:

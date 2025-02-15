@@ -1,8 +1,8 @@
 from typing import NamedTuple
 
-from src.services.crm.contract.address import Address
-from src.services.crm.contract.user import User
-from src.services.crm.contract.reservation import Reservation
+from src.services.booking.contract.address import Address
+from src.services.booking.contract.user import User
+from src.services.booking.contract.reservation import Reservation
 
 
 class AppointmentDto(NamedTuple):

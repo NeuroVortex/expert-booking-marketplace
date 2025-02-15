@@ -65,7 +65,7 @@ onMounted(async () => {
         :disabled="!services.length || !services.some((service) => service.selected)"
         class="next-button"
       >
-        Next
+        Book Now!
       </button>
     </div>
   </div>

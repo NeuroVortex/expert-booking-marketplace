@@ -6,12 +6,12 @@ import DateTimeSelection from './components/DateTimeSelection.vue';
 import { Service, TimeSlot, UserInfo } from './types';
 
 const currentTab = ref(1);
-const selectedServices = ref();
-const userInfo = ref({});
+const selectedServices = ref([]);
+const userInfo = ref();
 const appointmentDateTime = ref();
 
 const handleServiceUpdate = (services: Service) => {
-  selectedServices.value = services;
+  selectedServices.value = (services) => services.id;
 };
 
 const handleUserInfoUpdate = (info: UserInfo) => {
@@ -19,19 +19,24 @@ const handleUserInfoUpdate = (info: UserInfo) => {
 };
 
 const sendData = () => {
+  console.warn(userInfo.value)
   const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        "client": userInfo.value,
         "timeSlot": appointmentDateTime.value,
         "userInfo": userInfo.value,
         "services": selectedServices.value
       })
   };
   fetch('http://127.0.0.1:8000/v1/appointments/add', requestOptions).
-    then(() => alert('Appointment scheduled successfully!')).
-    catch(() => alert('Appointment scheduled Unsuccessfully!'))
+    then((response) => { if (response.ok) {
+    alert('Appointment scheduled successfully!')
+    return response.json();
+  }
+  alert('Appointment scheduled Unsuccessfully!')
+        throw new Error('Something went wrong');}).
+  catch(() => alert('Appointment scheduled Unsuccessfully!'))
 };
 
 // "client": {
@@ -81,7 +86,7 @@ const previousTab = () => {
           :class="{ active: tab === currentTab }"
           @click="switchTab(tab)"
         >
-          {{ tab === 1 ? 'Services' : tab === 2 ? 'Information' : 'Schedule' }}
+          {{ tab === 1 ? 'Services' : tab === 2 ? 'Booking' : 'Profile' }}
         </button>
       </div>
 
@@ -93,7 +98,7 @@ const previousTab = () => {
           />
         </div>
         
-        <div v-show="currentTab === 2">
+        <div v-show="currentTab === 3">
           <UserInformation
             @next="nextTab"
             @back="previousTab"
@@ -101,7 +106,7 @@ const previousTab = () => {
           />
         </div>
         
-        <div v-show="currentTab === 3">
+        <div v-show="currentTab === 2">
           <DateTimeSelection
             @back="previousTab"
             @submit="handleAppointmentSubmit"

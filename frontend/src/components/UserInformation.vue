@@ -1,23 +1,32 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import type { UserInfo } from '../types';
+import {UserInfo} from '../types';
 
 const emit = defineEmits(['next', 'back', 'updateUserInfo']);
 
 const userInfo = ref<UserInfo>({
-  name: '',
-  familyName: '',
-  email: '',
-  phone: '',
-  address: '',
-  identityCode: '',
-  zipCode: ''
+  personalInfo: {
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    identityNumber: ""
+},
+  address: {
+    province: "",
+    city: "",
+    homeNumber: "",
+    firstAddressLine: "",
+    secondAddressLine: null,
+    zipCode: ""
+}
 });
 
 const isFormValid = computed(() => {
-  return userInfo.value.name && 
-         userInfo.value.email && 
-         userInfo.value.phone;
+  return userInfo.value.personalInfo.firstName &&
+         userInfo.value.personalInfo.lastName &&
+         userInfo.value.personalInfo.email &&
+         userInfo.value.personalInfo.phone;
 });
 
 const handleNext = () => {
@@ -29,137 +38,124 @@ const handleNext = () => {
 </script>
 
 <template>
-  <div class="user-information">
+  <div class="user-information-container">
+    <div class="personal-information">
     <h2>Personal Information</h2>
     <form @submit.prevent="handleNext" class="info-form">
-      <div class="form-group">
-        <label for="first-name">First Name</label>
+      <div class="profile-container">
         <input
-          id="name"
-          v-model="userInfo.name"
+          id="first-name"
+          v-model="userInfo.personalInfo.firstName"
           type="text"
           required
-          placeholder="Enter your first name"
+          placeholder="First name"
         >
-      </div>
-      
-      <div class="form-group">
-        <label for="last-name">Last Name</label>
         <input
-          id="name"
-          v-model="userInfo.name"
+          id="last-name"
+          v-model="userInfo.personalInfo.lastName"
           type="text"
           required
-          placeholder="Enter your last name"
+          placeholder="Last name"
         >
       </div>
-
-      <div class="form-group">
-        <label for="email">Email</label>
+      <div class="email-phone-container">
         <input
           id="email"
-          v-model="userInfo.email"
+          v-model="userInfo.personalInfo.email"
           type="email"
           required
-          placeholder="Enter your email"
+          placeholder="Email"
         >
-      </div>
-      
-      <div class="form-group">
-        <label for="phone">Phone Number</label>
         <input
           id="phone"
-          v-model="userInfo.phone"
+          v-model="userInfo.personalInfo.phone"
           type="tel"
           required
-          placeholder="Enter your phone number"
+          placeholder="Phone number"
         >
       </div>
-
       <div class="form-group">
-        <label for="user_id">Id Number</label>
         <input
           id="user_id"
-          v-model="userInfo.identityCode"
+          v-model="userInfo.personalInfo.identityNumber"
           type="text"
           required
-          placeholder="Enter your Identity Number"
+          placeholder="Id number"
         >
       </div>
-      <div class="form-group">
-        <label for="City">Street</label>
-        <input
-          id="street-address"
-          v-model="userInfo.address"
-          type="text"
-          required
-          placeholder="Enter your City"
-        >
-      <div class="form-group">
-        <label for="Street">Street</label>
-        <input
-          id="street-address"
-          v-model="userInfo.address"
-          type="text"
-          required
-          placeholder="Enter your address"
-        >
-        <input
-          id="address"
-          v-model="userInfo.address"
-          type="text"
-          required
-          placeholder="Enter your address"
-        >
-        <input
-          id="address"
-          v-model="userInfo.address"
-          type="text"
-          required
-          placeholder="Enter your address"
-        >
+      <h2>Address</h2>
+      <div class="address-container">
+        <div class = "State-city-container">
+            <input
+            id="state/province"
+            v-model="userInfo.address.province"
+            type="text"
+            required
+            placeholder="State/Province"
+          >
+          <input
+            id="city"
+            v-model="userInfo.address.city"
+            type="text"
+            required
+            placeholder="City"
+          >
+        </div>
         <div class="form-group">
           <input
-          id="city"
-          v-model="userInfo.address"
-          type="text"
-          required
-          placeholder="Enter your city"
-        >
-        <input
-          id="state/province"
-          v-model="userInfo.address"
-          type="text"
-          required
-          placeholder="Enter your state/province"
-        >
+            id="first-address"
+            v-model="userInfo.address.firstAddressLine"
+            type="text"
+            required
+            placeholder="Address Line No. 1"
+          >
+          <input
+            id="second-address"
+            v-model="userInfo.address.secondAddressLine"
+            type="text"
+            placeholder="Address Line No. 2"
+          >
+          </div>
+        <div class="home-container">
+          <input
+            id="Number"
+            v-model="userInfo.address.homeNumber"
+            type="text"
+            required
+            placeholder="Home/Number"
+          >
+          <input
+            id="zip_code"
+            v-model="userInfo.address.zipCode"
+            type="text"
+            required
+            placeholder="Zip code"
+          >
         </div>
-      </div>
-
-      <div class="form-group">
-        <label for="zip_code">Id Number</label>
-        <input
-          id="zip_code"
-          v-model="userInfo.zipCode"
-          type="text"
-          required
-          placeholder="Enter your zip code"
-        >
-      </div>
+    </div>
 
       <div class="button-container">
         <button type="button" class="back-button" @click="emit('back')">
           Back
         </button>
         <button type="submit" class="next-button" :disabled="!isFormValid">
-          Next
+          Book a reservation
         </button>
       </div>
     </form>
   </div>
+  </div>
 </template>
 
 <style scoped>
+
+.user-information-container {
+  display: flex;
+  padding: 20px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
 .user-information {
   padding: 20px;
   max-width: 500px;
@@ -172,10 +168,40 @@ const handleNext = () => {
   gap: 20px;
 }
 
+.profile-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.email-phone-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.address-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.State-city-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.home-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 }
 
 label {

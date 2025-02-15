@@ -1,10 +1,10 @@
 from pydantic import BaseModel
 from datetime import datetime
-from .client import Client
+from .user import UserModel
 
 
-class AppointmentModel(BaseModel):
-    client: Client
-    datetime: datetime
+class ReservationModel(BaseModel):
+    userInfo: UserModel
+    bookedTime: datetime
     selectedServices: list[int]
     description: str

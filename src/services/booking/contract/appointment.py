@@ -1,7 +1,7 @@
 from typing import NamedTuple
 
-from src.services.crm.contract.client import Client
-from src.services.crm.contract.reservation import Reservation
+from src.services.booking.contract.client import Client
+from src.services.booking.contract.reservation import Reservation
 
 
 class Appointment(NamedTuple):
