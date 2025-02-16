@@ -5,15 +5,13 @@ from decimal import getcontext
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from fastapi import FastAPI
 from kink import inject
-from starlette.middleware.cors import CORSMiddleware
 
 from src.agents.actor_system import ActorSystem
-from src.application.app_settings import AppSetting
+from src.app.app_settings import AppSettings
 from src.application.time.timer import Timer
 from src.infrastructure.db_manager.db_checker import DBChecking
-from src.services.sales.dependencies.dependencies import Dependencies
-from src.settings import Registered_Models, Routers, DECIMAL_PRECISION, DECIMAL_ROUNDING, EXECUTORS, JOB_DEFAULTS, \
-    Allowed_Origins, Allowed_Headers, Allow_Credentials, Allowed_Methods
+from src.application.dependencies.dependencies import Dependencies
+from src.settings import Registered_Models, Routers, DECIMAL_PRECISION, DECIMAL_ROUNDING, EXECUTORS, JOB_DEFAULTS
 from src.infrastructure.db_manager.db_management import AsyncDatabaseManager
 from src.shared.logger.logger_interface import ICustomLogger
 
@@ -52,7 +50,7 @@ class Setup:
         Setup.timer.shutdown()
 
     async def configure_db(self):
-        Setup.db_manager = AsyncDatabaseManager(AppSetting.CREDENTIALS["DatabaseConfig"]["marketMaking"]["URL"])
+        Setup.db_manager = AsyncDatabaseManager(AppSettings.CREDENTIALS["databases"]["main"]["connection"])
 
         try:
             await DBChecking().check_tables_existence(Registered_Models)

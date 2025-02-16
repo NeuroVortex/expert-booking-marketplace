@@ -5,13 +5,22 @@ from sys import prefix
 from fastapi.middleware.cors import CORSMiddleware
 from apscheduler.executors.pool import ThreadPoolExecutor, ProcessPoolExecutor
 
-from src.application.app_settings import AppSetting
+from src.app.app_settings import AppSettings
 from src.app.config import Router
 from src.app.router.app import app_router
+from src.services.account_management.schema.account import Account
+from src.services.account_management.schema.user import User
+from src.services.account_management.schema.user_address import UserAddress
+from src.services.account_management.schema.user_payment import UserPayment
 from src.services.booking.routers.appointment_routers import appointment_router
-from src.services.sales.routers.service import service_router
 
-AppSetting()
+from src.services.booking.schema.reservation import Reservation
+from src.services.service_management.routers.service import service_router
+from src.services.service_management.schemas.service_categories import ServicesCategory
+from src.services.service_management.schemas.services import Service
+from src.services.service_management.schemas.user_services import UserService
+
+AppSettings()
 Allowed_Origins = [
     "http://localhost.com",
     "http://localhost",
@@ -23,10 +32,14 @@ Allowed_Methods = ["*"]
 Allowed_Headers = ["*"]
 
 Registered_Models = [
-    # TraderModel,
-    # Task,
-    # TaskContainer,
-    # SimilarStock
+    User,
+    UserPayment,
+    UserAddress,
+    Reservation,
+    Account,
+    ServicesCategory,
+    Service,
+    UserService
 ]
 
 Routers = [
@@ -40,12 +53,12 @@ EXECUTORS = {
     'processpool': ProcessPoolExecutor(5)
 }
 JOB_DEFAULTS = {
-    'coalesce': AppSetting.APP_SETTINGS["timerConfig"]["coalesce"],
-    'max_instances': AppSetting.APP_SETTINGS["timerConfig"]["max_instances"],
+    'coalesce': AppSettings.APP_SETTINGS["timerConfig"]["coalesce"],
+    'max_instances': AppSettings.APP_SETTINGS["timerConfig"]["max_instances"],
 }
 
 
 logging.getLogger('apscheduler.executors.default').propagate = False
 
-DECIMAL_PRECISION = AppSetting.APP_SETTINGS["businessConfig"]["accuracy"]["decimalPrecision"]
+DECIMAL_PRECISION = AppSettings.APP_SETTINGS["businessConfig"]["accuracy"]["decimalPrecision"]
 DECIMAL_ROUNDING = ROUND_DOWN

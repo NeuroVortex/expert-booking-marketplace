@@ -1,10 +1,11 @@
 from sqlalchemy import Column, TIMESTAMP, func, String, BigInteger
 from sqlalchemy.dialects.postgresql import JSONB
+from sqlalchemy.orm import relationship
 
 from src.infrastructure.db_manager.sql_alchemy.base import BaseModel
 
 
-class UserModel(BaseModel):
+class User(BaseModel):
     __tablename__ = 'users'
     user_id = Column(BigInteger, primary_key=True, autoincrement=True)
     first_name = Column(String, nullable=False)
@@ -17,3 +18,8 @@ class UserModel(BaseModel):
     extra = Column(JSONB, nullable=True)
     registration_datetime = Column(TIMESTAMP, server_default=func.now())
     update_datetime = Column(TIMESTAMP, server_default=func.now(), onupdate=func.current_timestamp())
+
+    accounts = relationship("Account", back_populates='users')
+    user_payments = relationship("UserPayment", back_populates='users')
+    user_services = relationship("UserService", back_populates='users')
+    user_addresses = relationship("UserAddress", back_populates='users')

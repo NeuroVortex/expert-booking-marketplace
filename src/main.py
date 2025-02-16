@@ -7,8 +7,8 @@ from starlette import status
 from starlette.middleware.cors import CORSMiddleware
 from starlette.requests import Request
 from starlette.responses import JSONResponse
-from src.services.sales.dependencies.dependencies import Dependencies
 from src.bootstrap import Bootstrap
+from src.application.dependencies.dependencies import Dependencies
 from src.settings import Allowed_Origins, Allowed_Methods, Allowed_Headers, Allow_Credentials
 
 

@@ -1,6 +1,6 @@
 from decimal import Decimal
 
-from src.services.sales.routers.serializer.service_model import ServiceModel
+from src.services.service_management.routers.serializer.service_model import ServiceModel
 from src.shared.contract.sales.dto.service_dto import ServiceDTO
 
 

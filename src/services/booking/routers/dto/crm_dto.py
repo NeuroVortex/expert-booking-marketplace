@@ -4,7 +4,7 @@ from src.services.booking.contract.address import Address
 from src.services.booking.contract.user import User
 from src.services.booking.contract.reservation import Reservation
 from src.services.booking.routers.models.reservation import ReservationModel
-from src.services.sales.routers.serializer.service_model import ServiceModel
+from src.services.service_management.routers.serializer.service_model import ServiceModel
 from src.shared.contract.crm.dto.appointment import AppointmentDto
 from src.shared.contract.sales.dto.service_dto import ServiceDTO
 

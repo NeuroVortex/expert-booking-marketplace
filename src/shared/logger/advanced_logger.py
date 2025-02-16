@@ -2,7 +2,7 @@ import logging
 import uuid
 from typing import Type
 
-from src.application.app_settings import AppSetting
+from src.app.app_settings import AppSettings
 from src.shared.logger.logger_interface import ICustomLogger
 from advancedLogger import AdvancedLogHandler, AdvancedLogFormatter
 
@@ -15,7 +15,7 @@ class AdvancedLogger(ICustomLogger):
         self.__handler = AdvancedLogHandler()
         self.__handler.setFormatter(AdvancedLogFormatter())
         self.__logger.addHandler(self.__handler)
-        self.__console = AppSetting.APP_SETTINGS['loggerConfig']['console']
+        self.__console = AppSettings.APP_SETTINGS['loggerConfig']['console']
 
     def info(self, msg: str, trace_id=str(uuid.uuid4())):
         if self.__console:

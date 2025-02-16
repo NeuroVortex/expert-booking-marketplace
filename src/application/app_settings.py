@@ -16,22 +16,22 @@ class AppSetting:
         self.__test_credentials = 'credentials-test'
         self.__file_format = '.json'
         AppSetting.APP_SETTINGS = self.__load_settings()
-        # AppSetting.CREDENTIALS = self.__load_credentials()
-        # AppSetting.TEST_CREDENTIALS = self.__load_test_credentials()
+        AppSetting.CREDENTIALS = self.__load_credentials()
+        AppSetting.TEST_CREDENTIALS = self.__load_test_credentials()
 
     def __evaluate_credentials(self):
         match str(os.getenv("MODE")).upper():
             case "PROD" | "PRODUCTION":
                 self.__credential = "credentials"
-                self.__app_settings = "appSettingsProd"
+                self.__app_settings = "app_settings"
 
             case "STG" | "STAGE":
                 self.__credential = "credentials-stg"
-                self.__app_settings = "appSettingsStg"
+                self.__app_settings = "app-settings-stg"
 
             case _:
                 self.__credential = "credentials-dev"
-                self.__app_settings = "appSettingsDev"
+                self.__app_settings = "app-settings-dev"
 
     def __load_settings(self):
         app_settings_name = os.getenv('APP_SETTING_NAME', self.__app_settings)

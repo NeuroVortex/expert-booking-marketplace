@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 
-from src.services.sales.routers.dto.service_extensions import ToServiceDto
-from src.services.sales.routers.response.responses import ServiceAddedSuccessfully, GetServices, GetService
-from src.services.sales.routers.serializer.service_model import ServiceModel
+from src.services.service_management.routers.dto.service_extensions import ToServiceDto
+from src.services.service_management.routers.response.responses import ServiceAddedSuccessfully, GetServices, GetService
+from src.services.service_management.routers.serializer.service_model import ServiceModel
 
 service_router = APIRouter()
 
