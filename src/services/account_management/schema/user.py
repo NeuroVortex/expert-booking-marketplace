@@ -1,4 +1,4 @@
-from sqlalchemy import Column, TIMESTAMP, func, String, BigInteger
+from sqlalchemy import Column, TIMESTAMP, func, String, BigInteger, Boolean
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import relationship
 
@@ -16,6 +16,7 @@ class User(BaseModel):
     identifier = Column(String, nullable=False)
     profile = Column(JSONB, nullable=False)
     extra = Column(JSONB, nullable=True)
+    is_archived = Column(Boolean, nullable=False, default=False)
     registration_datetime = Column(TIMESTAMP, server_default=func.now())
     update_datetime = Column(TIMESTAMP, server_default=func.now(), onupdate=func.current_timestamp())
 

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, TIMESTAMP, func, String, BigInteger, ForeignKey
+from sqlalchemy import Column, TIMESTAMP, func, String, BigInteger, ForeignKey, Boolean
 from sqlalchemy.orm import Mapped, relationship, mapped_column
 
 from src.infrastructure.db_manager.sql_alchemy.base import BaseModel
@@ -10,6 +10,7 @@ class UserPayment(BaseModel):
     payment_id = Column(BigInteger, primary_key=True, autoincrement=True, nullable=False)
     user_id: Mapped[int] = mapped_column(ForeignKey(User.user_id, ondelete="CASCADE"))
     payment_method = Column(String, nullable=False)
+    is_archived = Column(Boolean, nullable=False, default=False)
     creation_datetime = Column(TIMESTAMP, server_default=func.now())
     update_datetime = Column(TIMESTAMP, server_default=func.now(), onupdate=func.current_timestamp())
 
