@@ -1,4 +1,4 @@
-from sqlalchemy import Column, BigInteger, TIMESTAMP, func, ForeignKey, String
+from sqlalchemy import Column, BigInteger, TIMESTAMP, func, ForeignKey, String, Boolean
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -14,6 +14,7 @@ class Service(BaseModel):
     detail = Column(JSONB, nullable=False)
     creation_datetime = Column(TIMESTAMP, nullable=False, server_default=func.now())
     update_time = Column(TIMESTAMP, server_default=func.now(), onupdate=func.current_timestamp())
+    is_active = Column(Boolean, nullable=False, default=True)
 
     user_services = relationship("UserService", back_populates="services")
     service_category: Mapped["ServicesCategory"] = relationship("ServiceCategory", back_populates="services")

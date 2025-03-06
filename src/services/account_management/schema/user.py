@@ -15,7 +15,7 @@ class User(BaseModel):
     gender = Column(String, nullable=False)
     identifier = Column(String, nullable=False)
     profile = Column(JSONB, nullable=False)
-    extra = Column(JSONB, nullable=True)
+    extras = Column(JSONB, nullable=True)
     is_archived = Column(Boolean, nullable=False, default=False)
     registration_datetime = Column(TIMESTAMP, server_default=func.now())
     update_datetime = Column(TIMESTAMP, server_default=func.now(), onupdate=func.current_timestamp())

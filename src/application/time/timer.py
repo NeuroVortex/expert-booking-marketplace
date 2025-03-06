@@ -6,7 +6,7 @@ import pykka
 import pytz
 
 from src.agents.messages.time.signal import TimeSignal
-from src.application.app_settings import AppSetting
+from src.app.app_settings import AppSettings
 from src.shared.logger.logger_interface import ICustomLogger
 from src.shared.time.mode import TimeMode
 
@@ -16,11 +16,11 @@ class Timer:
     def __init__(self, logger: ICustomLogger, scheduler: AsyncIOScheduler):
         super().__init__()
         self.__scheduler = scheduler
-        self.__time_zone = AppSetting.APP_SETTINGS['appConfig']['timezone']
+        self.__time_zone = AppSettings.APP_SETTINGS['appConfig']['timezone']
         self.__identityRepository: dict[pykka.ActorRef, str] = {}
         self.__lastTriggered: dict[pykka.ActorRef, datetime] = {}
         self.__jobs: dict[pykka.ActorRef, Job] = {}
-        mode = AppSetting.APP_SETTINGS['appConfig']['timeMode']
+        mode = AppSettings.APP_SETTINGS['appConfig']['timeMode']
         self.__time_mode = TimeMode[str(mode).capitalize()]
         self.__logger = logger
 
