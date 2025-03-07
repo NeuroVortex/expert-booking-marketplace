@@ -1,10 +1,12 @@
 from abc import ABC, abstractmethod
 
+from src.services.service_management.contract.service_dto import ServiceDto
+
 
 class IServiceRepository(ABC):
 
     @abstractmethod
-    async def create(self, service):
+    async def add(self, service: ServiceDto) -> str:
         raise NotImplementedError
 
     @abstractmethod
@@ -20,11 +22,19 @@ class IServiceRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    async def get_by_id(self, service):
+    async def get_by_id(self, service_id: int):
         raise NotImplementedError
 
     @abstractmethod
-    async def get_by_category(self, category):
+    async def get_by_identifier(self, service_identifier: str):
+        raise NotImplementedError
+
+    @abstractmethod
+    async def get_children(self, parent_id: int):
+        raise NotImplementedError
+
+    @abstractmethod
+    async def get_parents(self):
         raise NotImplementedError
     
     @abstractmethod

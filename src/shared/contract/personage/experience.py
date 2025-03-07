@@ -1,8 +1,8 @@
 from datetime import datetime
 from typing import NamedTuple
 
-from src.services.account_management.contracts.personage.employement_type import EmployeeType
-from src.services.account_management.contracts.personage.location import Location
+from src.shared.contract.personage.employement_type import EmployeeType
+from src.shared.contract.personage.location import Location
 
 
 class Experience(NamedTuple):

@@ -3,6 +3,7 @@ from pydantic import BaseModel
 
 class ServiceAddedSuccessfully(BaseModel):
     id: int
+    slug: str
 
 class GetService(BaseModel):
     id: int

@@ -1,8 +1,8 @@
-from pydantic import BaseModel, Field, ConfigDict
+from pydantic import BaseModel
 
 
 class ServiceModel(BaseModel):
-    Title: str
-    Duration: int
+    Name: str
     Description: str
-    Price: str
+    Hover: str
+

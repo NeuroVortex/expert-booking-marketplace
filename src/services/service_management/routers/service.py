@@ -1,15 +1,33 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from typing import Annotated
 
-from src.services.service_management.routers.dto.service_extensions import ToServiceDto
+from fastapi import APIRouter, HTTPException, status, UploadFile, Depends
+
+from src.services.service_management.routers.dto.service_extensions import ToService
+
+from src.services.service_management.dependencies.dependencies import Dependencies
+from src.services.service_management.handlers.service import ServiceHandler
 from src.services.service_management.routers.response.responses import ServiceAddedSuccessfully, GetServices, GetService
 from src.services.service_management.routers.serializer.service_model import ServiceModel
+from src.shared.contract.service.service import Service
 
 service_router = APIRouter()
 
 
 @service_router.post(path="/add", tags=["Service"], status_code=status.HTTP_200_OK)
-async def add_service(service: ServiceModel) -> ServiceAddedSuccessfully:
+async def add_service(service: ServiceModel, service_handler: ServiceHandler =
+                     Depends(Dependencies.service_handler)) -> ServiceAddedSuccessfully:
     try:
+        service: Service = service @ ToService()
+        service_handler.add_service(service)
+        return ServiceAddedSuccessfully(id=service.slug, slug=service.slug)
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@service_router.post(path="/upload", tags=["Service"], status_code=status.HTTP_200_OK)
+async def upload_service_photo(service_slug: str, file: Annotated[UploadFile, None]) -> ServiceAddedSuccessfully:
+    try:
+        print(file)
         service_dto = service @ ToServiceDto()
         return ServiceAddedSuccessfully(id=1)
 

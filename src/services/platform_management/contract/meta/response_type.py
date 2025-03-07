@@ -1,6 +1,6 @@
 from enum import IntEnum
 
 
-class ResponseType(IntEnum):
+class ResponseTypeDto(IntEnum):
     Chatting = 0
     Reservation = 1

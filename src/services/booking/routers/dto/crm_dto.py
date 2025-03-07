@@ -1,12 +1,12 @@
 from decimal import Decimal
 
-from src.services.booking.contract.address import Address
+from src.shared.contract.appointment.address import Address
 from src.services.booking.contract.user import User
-from src.services.booking.contract.reservation import Reservation
+from src.shared.contract.appointment.reservation import Reservation
 from src.services.booking.routers.models.reservation import ReservationModel
 from src.services.service_management.routers.serializer.service_model import ServiceModel
-from src.shared.contract.crm.dto.appointment import AppointmentDto
-from src.shared.contract.sales.dto.service_dto import ServiceDTO
+from src.services.booking.contract.appointment import AppointmentDto
+from src.services.service_management.contract.service_dto import ServiceDTO
 
 
 class ToServiceDto:

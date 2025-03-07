@@ -16,7 +16,6 @@ from src.services.booking.routers.appointment_routers import appointment_router
 
 from src.services.booking.schema.reservation import Reservation
 from src.services.service_management.routers.service import service_router
-from src.services.service_management.schemas.service_categories import ServicesCategory
 from src.services.service_management.schemas.services import Service
 from src.services.service_management.schemas.user_services import UserService
 
@@ -37,7 +36,6 @@ Registered_Models = [
     UserAddress,
     Reservation,
     Account,
-    ServicesCategory,
     Service,
     UserService
 ]

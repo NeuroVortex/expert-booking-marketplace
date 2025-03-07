@@ -9,4 +9,3 @@ class Certificate(NamedTuple):
     expiration_date: datetime | None
     credential_id: str
     credential_url: str
-
