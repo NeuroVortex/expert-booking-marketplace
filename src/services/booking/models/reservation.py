@@ -1,17 +1,20 @@
-from sqlalchemy import Column, TIMESTAMP, func, String, BigInteger, ForeignKey
+import uuid
+
+from sqlalchemy import Column, TIMESTAMP, func, String, BigInteger, ForeignKey, UUID
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, relationship, mapped_column
 
 from src.infrastructure.db_manager.sql_alchemy.base import BaseModel
-from src.services.account_management.schema.user import User
-from src.services.account_management.schema.user_address import UserAddress
+from src.services.account_management.models.user import User
+from src.services.account_management.models.user_address import UserAddress
 
 
 class Reservation(BaseModel):
     __tablename__ = 'reservations'
-    reservation_id = Column(BigInteger, primary_key=True, autoincrement=True, nullable=False)
-    user_address_id: Mapped[int] = mapped_column(ForeignKey(UserAddress.user_address_id, ondelete="CASCADE"))
-    service_provider_id: Mapped[int] = mapped_column(ForeignKey(User.user_id, ondelete="CASCADE"))
+    id = Column(BigInteger, primary_key=True, autoincrement=True, nullable=False)
+    public_id = Column(UUID(as_uuid=False), unique=True, default=uuid.uuid4, nullable=False)
+    user_address_id: Mapped[int] = mapped_column(ForeignKey(UserAddress.id, ondelete="CASCADE"))
+    service_provider_id: Mapped[int] = mapped_column(ForeignKey(User.id, ondelete="CASCADE"))
     state = Column(String, nullable=False)
     detail = Column(JSONB, nullable=False)
     procedure = Column(JSONB, nullable=False)

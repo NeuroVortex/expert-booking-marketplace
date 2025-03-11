@@ -1,18 +1,15 @@
 import asyncio
 from logging.config import fileConfig
-from pathlib import Path
-import sys
+
 from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent.parent.parent
-print(BASE_DIR)
-sys.path.append(str(BASE_DIR))
+from alembic import context
 
 from src.app.app_settings import AppSettings
 from src.infrastructure.db_manager.db_management import AsyncDatabaseManager
-from alembic import context
+from src.infrastructure.db_manager.sql_alchemy.base import BaseModel
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -26,15 +23,17 @@ if config.config_file_name is not None:
 # add your model's MetaData object here
 # for 'autogenerate' support
 # from myapp import mymodel
-from src.infrastructure.db_manager.sql_alchemy.base import BaseModel
-from src.settings import Registered_Models
 # target_metadata = mymodel.Base.metadata
+from pathlib import Path
 
+path = Path(__file__).parent.resolve()
+
+from src.settings import Registered_Models
 target_metadata = BaseModel.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
-# my_important_option = config.get_main_option("my_important_option")
+# my_important_option = config.get_main_option("my_im portant_option")
 # ... etc.
 
 
@@ -75,14 +74,13 @@ async def run_async_migrations() -> None:
 
     """
     AppSettings()
-    async_db_management = AsyncDatabaseManager(AppSettings.CREDENTIALS["databases"]["main"]["connection"])
-
     # connectable = async_engine_from_config(
     #     config.get_section(config.config_ini_section, {}),
     #     prefix="sqlalchemy.",
     #     poolclass=pool.NullPool,
     # )
-    connectable = async_db_management.ENGINE
+
+    connectable = AsyncDatabaseManager(AppSettings.CREDENTIALS["databases"]["main"]["connection"]).ENGINE
     async with connectable.connect() as connection:
         await connection.run_sync(do_run_migrations)
 

@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
 
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from src.services.service_management.contract.service_dto import ServiceDto
 
 
@@ -18,15 +20,11 @@ class IServiceRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    async def get(self, service):
-        raise NotImplementedError
-
-    @abstractmethod
     async def get_by_id(self, service_id: int):
         raise NotImplementedError
 
     @abstractmethod
-    async def get_by_identifier(self, service_identifier: str):
+    async def get_by_public_id(self, service_identifier: str):
         raise NotImplementedError
 
     @abstractmethod
@@ -39,6 +37,10 @@ class IServiceRepository(ABC):
     
     @abstractmethod
     async def get_all(self):
+        raise NotImplementedError
+
+    @classmethod
+    def service_repo(cls, session: AsyncSession) -> 'IServiceRepository':
         raise NotImplementedError
 
 

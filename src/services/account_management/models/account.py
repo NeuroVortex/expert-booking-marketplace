@@ -1,15 +1,18 @@
+import uuid
+
 from sqlalchemy import Column, TIMESTAMP, func, String, BigInteger, ForeignKey, Boolean
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, relationship, mapped_column
 
 from src.infrastructure.db_manager.sql_alchemy.base import BaseModel
-from src.services.account_management.schema.user import User
+from .user import User
 
 
 class Account(BaseModel):
     __tablename__ = 'accounts'
-    account_id = Column(UUID, primary_key=True, autoincrement=True, nullable=False)
-    user_id = mapped_column(BigInteger, ForeignKey(User.user_id, ondelete="CASCADE"))
+    id = Column(BigInteger, primary_key=True, autoincrement=True, nullable=False)
+    public_id = Column(UUID(as_uuid=False), default=uuid.uuid4, nullable=False)
+    user_id = mapped_column(BigInteger, ForeignKey(User.id, ondelete="CASCADE"))
     platform_type = Column(String, nullable=False)
     username = Column(String, nullable=False)
     authentication = Column(JSONB, nullable=False)

@@ -1,23 +1,21 @@
 import logging
 from decimal import ROUND_DOWN
-from sys import prefix
 
-from fastapi.middleware.cors import CORSMiddleware
 from apscheduler.executors.pool import ThreadPoolExecutor, ProcessPoolExecutor
 
 from src.app.app_settings import AppSettings
 from src.app.config import Router
 from src.app.router.app import app_router
-from src.services.account_management.schema.account import Account
-from src.services.account_management.schema.user import User
-from src.services.account_management.schema.user_address import UserAddress
-from src.services.account_management.schema.user_payment import UserPayment
+from src.services.account_management.models.account import Account
+from src.services.account_management.models.user import User
+from src.services.account_management.models.user_address import UserAddress
+from src.services.account_management.models.user_payment import UserPayment
 from src.services.booking.routers.appointment_routers import appointment_router
 
-from src.services.booking.schema.reservation import Reservation
+from src.services.booking.models.reservation import Reservation
 from src.services.service_management.routers.service import service_router
-from src.services.service_management.schemas.services import Service
-from src.services.service_management.schemas.user_services import UserService
+from src.services.service_management.models.services import Service
+from src.services.service_management.models.user_services import UserService
 
 AppSettings()
 Allowed_Origins = [

@@ -1,4 +1,6 @@
-from sqlalchemy import Column, TIMESTAMP, func, String, BigInteger, Boolean
+import uuid
+
+from sqlalchemy import Column, TIMESTAMP, func, String, BigInteger, Boolean, UUID
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import relationship
 
@@ -7,7 +9,8 @@ from src.infrastructure.db_manager.sql_alchemy.base import BaseModel
 
 class User(BaseModel):
     __tablename__ = 'users'
-    user_id = Column(BigInteger, primary_key=True, autoincrement=True)
+    id = Column(BigInteger, primary_key=True, autoincrement=True)
+    public_id = Column(UUID(as_uuid=True), unique=True, nullable=False, default=uuid.uuid4)
     first_name = Column(String, nullable=False)
     last_name = Column(String, nullable=False)
     primary_email = Column(String, nullable=False)
@@ -20,7 +23,7 @@ class User(BaseModel):
     registration_datetime = Column(TIMESTAMP, server_default=func.now())
     update_datetime = Column(TIMESTAMP, server_default=func.now(), onupdate=func.current_timestamp())
 
-    accounts = relationship("Account", back_populates='users')
-    user_payments = relationship("UserPayment", back_populates='users')
-    user_services = relationship("UserService", back_populates='users')
-    user_addresses = relationship("UserAddress", back_populates='users')
+    accounts = relationship("Account", back_populates='user')
+    user_payments = relationship("UserPayment", back_populates='user')
+    user_services = relationship("UserService", back_populates='user')
+    user_addresses = relationship("UserAddress", back_populates='user')

@@ -1,6 +1,8 @@
 import pykka
 from kink import di, inject
 
+from src.services.service_management.repositories.service import IServiceRepository
+from src.services.service_management.repositories.sql_alchemy.service import SQLAlchemyServiceRepository
 from src.shared.logger.logger_interface import ICustomLogger
 
 
@@ -11,6 +13,7 @@ class Dependencies:
     def __init__(self, logger: ICustomLogger):
         self.db_connection = None
         self.__logger = logger
+        self.__setup_repositories()
         self.__setup_dependencies()
         Dependencies.DependencyInjector = self
 
@@ -19,3 +22,6 @@ class Dependencies:
 
     def logger(self) -> ICustomLogger:
         return self.__logger
+
+    def __setup_repositories(self):
+        di[IServiceRepository] = SQLAlchemyServiceRepository

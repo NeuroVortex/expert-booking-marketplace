@@ -2,8 +2,7 @@ from pydantic import BaseModel
 
 
 class ServiceAddedSuccessfully(BaseModel):
-    id: int
-    slug: str
+    publicId: str
 
 class GetService(BaseModel):
     id: int

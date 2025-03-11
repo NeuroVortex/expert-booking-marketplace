@@ -1,15 +1,18 @@
-from sqlalchemy import Column, TIMESTAMP, func, String, BigInteger, ForeignKey, Boolean
+import uuid
+
+from sqlalchemy import Column, TIMESTAMP, func, String, BigInteger, ForeignKey, Boolean, UUID
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, relationship, mapped_column
 
 from src.infrastructure.db_manager.sql_alchemy.base import BaseModel
-from src.services.account_management.schema.user import User
+from .user import User
 
 
 class UserAddress(BaseModel):
     __tablename__ = 'user_addresses'
-    user_address_id = Column(BigInteger, primary_key=True, autoincrement=True, nullable=False)
-    user_id = mapped_column(BigInteger, ForeignKey(User.user_id, ondelete="CASCADE"))
+    id = Column(BigInteger, primary_key=True, autoincrement=True, nullable=False)
+    public_id = Column(UUID(as_uuid=True), unique=True, nullable=False, default=uuid.uuid4)
+    user_id = mapped_column(BigInteger, ForeignKey(User.id, ondelete="CASCADE"))
     title = Column(String, nullable=False)
     detail = Column(JSONB, nullable=False)
     is_archived = Column(Boolean, nullable=False, default=False)

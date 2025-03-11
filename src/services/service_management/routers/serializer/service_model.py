@@ -2,7 +2,7 @@ from pydantic import BaseModel
 
 
 class ServiceModel(BaseModel):
-    Name: str
-    Description: str
-    Hover: str
+    name: str
+    description: str
+    parentServiceId: int | None
 
