@@ -3,14 +3,13 @@ from pydantic import BaseModel
 
 class ServiceAddedSuccessfully(BaseModel):
     publicId: str
+    msg: str = "service added successfully"
 
 class GetService(BaseModel):
     id: int
     title: str
     description: str
-    duration: str
-    price: str
-    selected: bool
+    isActive: bool
 
 class GetServices(BaseModel):
     services: list[GetService]

@@ -2,13 +2,13 @@ from src.shared.contract.appointment.address import Address
 from src.services.booking.contract.user import User
 from src.shared.contract.appointment.reservation import Reservation
 from src.services.booking.routers.models.reservation import ReservationModel
-from src.services.service_management.routers.serializer.service_model import ServiceModel
+from src.services.service_management.schemas.service import Service
 from src.services.booking.domain.entities.appointment import AppointmentDto
-from src.services.service_management.contract.service_dto import ServiceDto
+from src.services.service_management.domain.entity.service_dto import ServiceDto
 
 
 class ToServiceDto:
-    def __rmatmul__(self, service_model: ServiceModel):
+    def __rmatmul__(self, service_model: Service):
         return ServiceDto(name=service_model.name,
                           description=service_model.description,
                           parent_service_id=service_model.parentServiceId)

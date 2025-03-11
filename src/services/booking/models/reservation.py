@@ -23,5 +23,5 @@ class Reservation(BaseModel):
     creation_datetime = Column(TIMESTAMP, server_default=func.now())
     update_datetime = Column(TIMESTAMP, server_default=func.now(), onupdate=func.now())
 
-    user_address: Mapped["UserAddress"] = relationship("UserAddress", back_populates="reservations")
-    service_provider: Mapped["UserAddress"] = relationship("User", back_populates="reservations")
+    user_addresses: Mapped["UserAddress"] = relationship("UserAddress", back_populates="reservations")
+    service_provider: Mapped["User"] = relationship("User", back_populates="reservations")

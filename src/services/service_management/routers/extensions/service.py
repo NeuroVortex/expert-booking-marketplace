@@ -1,9 +1,14 @@
-from src.services.service_management.routers.serializer.service_model import ServiceModel
-from src.shared.contract.service.details import ServiceDetails
-from src.shared.contract.service.service import Service
+from src.services.service_management.domain.service_details import ServiceDetailsEntity
+from src.services.service_management.domain.service_profile import ServiceProfileEntity
+from src.services.service_management.schemas.service.service import Service
+from src.services.service_management.domain.service import ServiceEntity
 
 
-class ToService:
-    def __rmatmul__(self, service_model: ServiceModel):
-        return Service(name=service_model.Title,
-                       details=ServiceDetails(description=service_model.Description))
+class ToServiceEntity:
+    def __rmatmul__(self, service: Service | None):
+        return ServiceEntity(name=service.name,
+                             id=service.id,
+                             public_id=service.public_id,
+                             parent_service_id=service.parent_service_id,
+                             details=ServiceDetailsEntity(**service.details),
+                             profile=ServiceProfileEntity(**service.profile)) if service else None

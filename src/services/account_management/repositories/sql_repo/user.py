@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.services.account_management.application.user.extension.user_model import ToUserModel, ToUser
 from src.services.account_management.repositories.user import IUserRepository
-from src.services.account_management.schema.user import User as _UserModel
+from src.services.account_management.models.user import User as _UserModel
 from src.shared.contract.personage.user import User
 
 
@@ -50,3 +50,6 @@ class UserRepository(IUserRepository):
         update_user = instance @ ToUser()
         self.__identity_map[instance.user_id] = instance
         return update_user
+
+    async def is_exist(self, user):
+        raise NotImplementedError

@@ -27,3 +27,4 @@ class User(BaseModel):
     user_payments = relationship("UserPayment", back_populates='user')
     user_services = relationship("UserService", back_populates='user')
     user_addresses = relationship("UserAddress", back_populates='user')
+    reservations = relationship("Reservation", back_populates='service_provider')

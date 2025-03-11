@@ -26,3 +26,7 @@ class IUserRepository(ABC):
     @abstractmethod
     async def update(self, user):
         raise NotImplementedError
+
+    @abstractmethod
+    async def is_exist(self, user):
+        raise NotImplementedError

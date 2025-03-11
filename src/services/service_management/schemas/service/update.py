@@ -1,8 +1,7 @@
 from pydantic import BaseModel
 
 
-class ServiceModel(BaseModel):
+class UpdateService(BaseModel):
     name: str
     description: str
-    parentServiceId: int | None
-
+    parent

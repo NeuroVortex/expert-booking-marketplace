@@ -31,7 +31,7 @@ class Setup:
 
     async def setup(self):
         self.__setup_logger()
-        # await self.configure_db()
+        await self.configure_db()
         await self.config_routes()
         # self.__run()
 
