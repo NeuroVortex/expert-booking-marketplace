@@ -1,5 +1,5 @@
 from typing import NamedTuple
 
 
-class ServiceDetailsEntity(NamedTuple):
+class ServiceDetails(NamedTuple):
     description: str | None

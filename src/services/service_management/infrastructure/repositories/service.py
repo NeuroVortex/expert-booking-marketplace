@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.services.service_management.domain.service import ServiceEntity
+from src.services.service_management.domain.entities.service import ServiceEntity
 
 
 class IServiceRepository(ABC):
@@ -28,13 +28,9 @@ class IServiceRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    async def get_children(self, parent_id: int) -> list[ServiceEntity]:
+    async def get_services(self, parent_public_id: str | None = None):
         raise NotImplementedError
 
-    @abstractmethod
-    async def get_parents(self) -> list[ServiceEntity]:
-        raise NotImplementedError
-    
     @abstractmethod
     async def get_all(self) -> list[ServiceEntity]:
         raise NotImplementedError

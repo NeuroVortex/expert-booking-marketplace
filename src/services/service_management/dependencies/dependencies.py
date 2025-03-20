@@ -1,8 +1,9 @@
-from src.services.service_management.handlers.service import ServiceHandler
+
 from kink import di
 
-from src.services.service_management.repositories.service import IServiceRepository
-from src.services.service_management.repositories.sql_alchemy.service import SQLAlchemyServiceRepository
+from src.services.service_management.application.handlers.service import ServiceHandler
+from src.services.service_management.infrastructure.repositories.service import IServiceRepository
+from src.services.service_management.infrastructure.repositories.sql_alchemy.service import SQLAlchemyServiceRepository
 
 
 class Dependencies:

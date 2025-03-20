@@ -1,7 +1,7 @@
 from src.services.account_management.schema.user import User as _UserModel
-from src.shared.contract.personage.gender import Gender
-from src.shared.contract.personage.profile import Profile
-from src.shared.contract.personage.user import User
+from src.services.account_management.domain.providers.gender import Gender
+from src.services.account_management.domain.profile import Profile
+from src.services.account_management.domain.user import User
 
 
 class ToUserModel:

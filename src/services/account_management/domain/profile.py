@@ -1,8 +1,8 @@
 from typing import NamedTuple
 
-from .certificate import Certificate
-from .education import Education
-from .experience import Experience
+from src.services.account_management.domain.providers.certificate import Certificate
+from src.services.account_management.domain.providers.education import Education
+from src.services.account_management.domain.providers.experience import Experience
 from .location import Location
 
 

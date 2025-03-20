@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from src.services.account_management.application.user.extension.user_model import ToUserModel, ToUser
 from src.services.account_management.repositories.user import IUserRepository
 from src.services.account_management.models.user import User as _UserModel
-from src.shared.contract.personage.user import User
+from src.services.account_management.domain.user import User
 
 
 class UserRepository(IUserRepository):

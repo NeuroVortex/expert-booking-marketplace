@@ -1,8 +1,7 @@
-import pykka
 from kink import di, inject
 
-from src.services.service_management.repositories.service import IServiceRepository
-from src.services.service_management.repositories.sql_alchemy.service import SQLAlchemyServiceRepository
+from src.services.service_management.infrastructure.repositories.service import IServiceRepository
+from src.services.service_management.infrastructure.repositories.sql_alchemy.service import SQLAlchemyServiceRepository
 from src.shared.logger.logger_interface import ICustomLogger
 
 

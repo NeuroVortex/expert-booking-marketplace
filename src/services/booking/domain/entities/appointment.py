@@ -1,13 +1,15 @@
-from typing import NamedTuple
+from dataclasses import dataclass
 
-from src.shared.contract.appointment.address import Address
-from src.services.booking.contract.user import User
-from src.shared.contract.appointment.reservation import Reservation
+from src.services.account_management.domain.user import UserEntity
+from src.services.booking.domain.value_objects.address import Address
+from src.services.booking.domain.value_objects.reservation import Reservation
 
 
-class AppointmentDto(NamedTuple):
+@dataclass
+class AppointmentEntity:
+    public_id: str
     selected_services: list[int]
     description: str
-    client: User
+    client: UserEntity
     address: Address
     reservation: Reservation

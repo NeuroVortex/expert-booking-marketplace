@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field
 
 
-class Service(BaseModel):
+class ServiceDto(BaseModel):
     name: str
     description: str
-    parentServiceId: int | None = Field(None, gt=0)
+    parent_public_id: str | None = Field(None)

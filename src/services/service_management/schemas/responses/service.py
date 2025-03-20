@@ -6,10 +6,20 @@ class ServiceAddedSuccessfully(BaseModel):
     msg: str = "service added successfully"
 
 class GetService(BaseModel):
-    id: int
+    public_id: str
     title: str
     description: str
-    isActive: bool
+    is_active: bool
+    photo_path: str | None = None
 
 class GetServices(BaseModel):
     services: list[GetService]
+
+class GetUserService(BaseModel):
+    public_id: str
+    name: str
+    price: str
+    duration: str
+
+class GetUserServices(BaseModel):
+    users: list[GetUserService]
