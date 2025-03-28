@@ -4,8 +4,9 @@ from fastapi import APIRouter, HTTPException, status, UploadFile, Depends
 
 from src.services.service_management.application.handlers.service import ServiceHandler
 from src.services.service_management.dependencies.dependencies import Dependencies
-from src.services.service_management.schemas.responses.service import ServiceAddedSuccessfully, GetServices, GetService
-from src.services.service_management.schemas.service.service import ServiceDto
+from src.services.service_management.schemas.responses.service import ServiceAddedSuccessfully, GetServices, GetService, \
+    ServiceDeletedSuccessfully
+from src.services.service_management.schemas.requests.service import ServiceDto
 
 service_router = APIRouter()
 
@@ -61,3 +62,14 @@ async def get_services(parent_public_id: str | None = None, service_handler: Ser
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@service_router.delete(path="", status_code=status.HTTP_200_OK)
+async def delete_service(service_public_id: str, service_handler: ServiceHandler =
+                     Depends(Dependencies.service_handler)) -> ServiceDeletedSuccessfully:
+    try:
+            await service_handler.delete_service(service_public_id)
+            return ServiceDeletedSuccessfully()
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+

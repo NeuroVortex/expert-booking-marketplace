@@ -1,5 +1,5 @@
 from src.services.service_management.domain.value_objects.service_details import ServiceDetails
-from src.services.service_management.schemas.service.service import ServiceDto
+from src.services.service_management.schemas.requests.service import ServiceDto
 from src.services.service_management.domain.entities.service import ServiceEntity
 
 

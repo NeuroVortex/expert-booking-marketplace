@@ -1,13 +1,16 @@
 from abc import ABC, abstractmethod
 
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from src.services.account_management.domain.user import UserEntity
 from src.services.service_management.domain.entities.service import ServiceEntity
+from src.services.service_management.domain.entities.user_service import UserServiceEntity
 
 
 class IUserServiceRepository(ABC):
 
     @abstractmethod
-    async def add(self, user_id, service_id):
+    async def add(self, user_services: list[UserServiceEntity]):
         raise NotImplementedError
 
     @abstractmethod
@@ -20,4 +23,8 @@ class IUserServiceRepository(ABC):
 
     @abstractmethod
     async def get_by_user(self, user) -> list[ServiceEntity]:
+        raise NotImplementedError
+
+    @classmethod
+    def user_service_repo(cls, session: AsyncSession) -> 'IUserServiceRepository':
         raise NotImplementedError

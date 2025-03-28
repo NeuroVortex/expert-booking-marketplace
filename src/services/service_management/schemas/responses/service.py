@@ -5,6 +5,10 @@ class ServiceAddedSuccessfully(BaseModel):
     publicId: str
     msg: str = "service added successfully"
 
+class ServiceDeletedSuccessfully(BaseModel):
+    msg: str = "service deleted successfully"
+
+
 class GetService(BaseModel):
     public_id: str
     title: str

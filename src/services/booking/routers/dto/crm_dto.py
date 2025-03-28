@@ -4,7 +4,7 @@ from src.services.booking.domain.value_objects.reservation import Reservation
 from src.services.booking.routers.models.reservation import ReservationModel
 from src.services.booking.routers.responses.response import Appointment
 from src.services.service_management.domain.entities.service import ServiceEntity
-from src.services.service_management.schemas.service.service import ServiceDto
+from src.services.service_management.schemas.requests.service import ServiceDto
 
 
 class ToServiceDto:

@@ -24,15 +24,10 @@ class SQLAlchemyServiceRepository(IServiceRepository):
         return str(instance.public_id)
 
     async def delete(self, service_id):
-        try:
-            instance = await self.__session.get(Service, service_id)
-            await self.__session.delete(instance)
-            await self.__session.commit()
-            await self.__session.refresh(instance)
-            return True
-
-        except Exception as e:
-            return False, str(e)
+        stmt = select(Service).where(Service.public_id == service_id)
+        result = await self.__session.execute(stmt)
+        instance = result.scalar_one()
+        await self.__session.delete(instance)
 
     async def update(self, service: ServiceEntity):
         updated_instance: dict = service @ ToUpdatedService()
@@ -66,6 +61,12 @@ class SQLAlchemyServiceRepository(IServiceRepository):
         result = await self.__session.execute(stmt)
         instances = result.scalars()
         services = [instance @ ModelToServiceEntity() for instance in instances]
+        return services
+
+    async def get_bulk_services(self, parent_public_ids: list[str]):
+        stmt = select(Service).where(Service.public_id.in_(parent_public_ids))
+        result = await self.__session.execute(stmt)
+        services = [instance @ ModelToServiceEntity() for instance in result.scalars()]
         return services
 
     async def get_all(self) -> list[ServiceEntity]:

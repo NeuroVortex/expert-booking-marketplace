@@ -32,6 +32,10 @@ class IServiceRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
+    async def get_bulk_services(self, parent_public_ids: list[str]):
+        raise NotImplementedError
+
+    @abstractmethod
     async def get_all(self) -> list[ServiceEntity]:
         raise NotImplementedError
 

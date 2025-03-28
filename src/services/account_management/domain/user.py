@@ -5,7 +5,7 @@ from src.services.account_management.domain.profile import Profile
 
 
 class UserEntity(NamedTuple):
-    user_id: int | None
+    id: int | None
     user_public_id: str | None
     first_name: str
     last_name: str

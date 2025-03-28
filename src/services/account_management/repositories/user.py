@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
 
+from src.services.account_management.domain.user import UserEntity
+
 
 class IUserRepository(ABC):
 
@@ -21,6 +23,10 @@ class IUserRepository(ABC):
 
     @abstractmethod
     async def get_by_identification(self, identification: str):
+        raise NotImplementedError
+
+    @abstractmethod
+    async def get_by_user_public_id(self, public_id: str) -> UserEntity:
         raise NotImplementedError
 
     @abstractmethod

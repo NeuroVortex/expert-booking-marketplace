@@ -16,6 +16,7 @@ from src.services.booking.models.reservation import Reservation
 from src.services.service_management.routers.service import service_router
 from src.services.service_management.infrastructure.models.services import Service
 from src.services.service_management.infrastructure.models.user_services import UserService
+from src.services.service_management.routers.user_service import user_service_router
 
 AppSettings()
 Allowed_Origins = [
@@ -41,7 +42,8 @@ Registered_Models = [
 Routers = [
     Router(prefix="", router=app_router, tags=["/"]),
     Router(prefix='/v1/services', router=service_router, tags=["services"]),
-    Router(prefix='/v1/appointments', router=appointment_router, tags=["ReservationModel"]),
+    Router(prefix='/v1/user_services', router=user_service_router, tags=["user-services"]),
+    Router(prefix='/v1/appointments', router=appointment_router, tags=["reservation"]),
 ]
 
 EXECUTORS = {
