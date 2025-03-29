@@ -11,7 +11,7 @@ from src.infrastructure.db_manager.sql_alchemy.base import BaseModel
 class Service(BaseModel):
     __tablename__ = 'services'
     id = Column(BigInteger, primary_key=True, autoincrement=True)
-    public_id = Column(UUID(as_uuid=False), unique=True, nullable=False, default=uuid.uuid4)
+    public_id = Column(UUID(as_uuid=False), primary_key=True, unique=True, nullable=False, default=uuid.uuid4)
     parent_service_id = Column(BigInteger, ForeignKey("services.id"), nullable=True)
     name: Mapped[str] = mapped_column(nullable=False)
     profile =  Column(JSONB, nullable=False)

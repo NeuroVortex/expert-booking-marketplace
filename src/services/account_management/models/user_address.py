@@ -11,7 +11,7 @@ from .user import User
 class UserAddress(BaseModel):
     __tablename__ = 'user_addresses'
     id = Column(BigInteger, primary_key=True, autoincrement=True, nullable=False)
-    public_id = Column(UUID(as_uuid=True), unique=True, nullable=False, default=uuid.uuid4)
+    public_id = Column(UUID(as_uuid=True), unique=True, primary_key=True, nullable=False, default=uuid.uuid4)
     user_id = mapped_column(BigInteger, ForeignKey(User.id, ondelete="CASCADE"))
     title = Column(String, nullable=False)
     detail = Column(JSONB, nullable=False)

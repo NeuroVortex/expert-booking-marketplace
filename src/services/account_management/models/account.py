@@ -11,7 +11,7 @@ from .user import User
 class Account(BaseModel):
     __tablename__ = 'accounts'
     id = Column(BigInteger, primary_key=True, autoincrement=True, nullable=False)
-    public_id = Column(UUID(as_uuid=False), default=uuid.uuid4, nullable=False)
+    public_id = Column(UUID(as_uuid=False), primary_key=True, default=uuid.uuid4, nullable=False)
     user_id = mapped_column(BigInteger, ForeignKey(User.id, ondelete="CASCADE"))
     platform_type = Column(String, nullable=False)
     username = Column(String, nullable=False)

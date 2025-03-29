@@ -12,7 +12,7 @@ from src.services.service_management.infrastructure.models.services import Servi
 class UserService(BaseModel):
     __tablename__ = 'user_services'
     id = Column(BigInteger, primary_key=True, autoincrement=True, nullable=False)
-    public_id = Column(UUID(as_uuid=False), unique=True, nullable=False, default=uuid.uuid4)
+    public_id = Column(UUID(as_uuid=False), primary_key=True, unique=True, nullable=False, default=uuid.uuid4)
     user_id: Mapped[int] = mapped_column(ForeignKey(User.id, ondelete="CASCADE"))
     service_id: Mapped[int] = mapped_column(ForeignKey(Service.id, ondelete="CASCADE"))
     details = Column(JSONB, nullable=False)
