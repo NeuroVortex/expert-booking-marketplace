@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import APIRouter, HTTPException, status, UploadFile, Depends
 
 from src.services.service_management.application.handlers.service import ServiceHandler
-from src.services.service_management.dependencies.dependencies import Dependencies
+from src.services.service_management.routers.dependencies.dependencies import Dependencies
 from src.services.service_management.schemas.responses.service import ServiceAddedSuccessfully, GetServices, GetService, \
     ServiceDeletedSuccessfully
 from src.services.service_management.schemas.requests.service import ServiceDto

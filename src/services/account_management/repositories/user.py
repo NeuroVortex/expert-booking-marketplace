@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+from src.infrastructure.db_manager.db_management import AsyncDatabaseManager
 from src.services.account_management.domain.user import UserEntity
 
 
@@ -35,4 +36,8 @@ class IUserRepository(ABC):
 
     @abstractmethod
     async def is_exist(self, user):
+        raise NotImplementedError
+
+    @abstractmethod
+    def user_repo(self, session: AsyncDatabaseManager) -> 'IUserRepository':
         raise NotImplementedError

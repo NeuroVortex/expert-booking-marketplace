@@ -2,6 +2,7 @@ from decimal import Decimal
 
 from kink import inject
 
+from src.infrastructure.db_manager.sql_alchemy.session import AsyncDatabaseSessionManager
 from src.services.account_management.domain.user import UserEntity
 from src.services.account_management.repositories.user import IUserRepository
 from src.services.service_management.application.handlers.service import ServiceHandler
@@ -21,9 +22,10 @@ class UserServiceHandler:
         self.__user_repo: IUserRepository = user_repository
 
     async def assign_services_to_user(self, user_service_dto: UserServicesDto):
-        user: UserEntity = await self.__user_repo.get_by_user_public_id(user_service_dto.public_user_id)
-        services_public_ids = [service.public_id for service in user_service_dto.services]
-        services: list[ServiceEntity] = await self.__service_handler.get_bulk_services(services_public_ids)
+        async with AsyncDatabaseSessionManager() as session:
+            user: UserEntity = await self.__user_repo.user_repo(session).get_by_user_public_id(user_service_dto.public_user_id)
+            services_public_ids = [service.public_id for service in user_service_dto.services]
+            services: list[ServiceEntity] = await self.__service_handler.get_bulk_services(services_public_ids)
         user_services = []
         for service in services:
             service_dto: UserServiceDto = next(
@@ -41,3 +43,8 @@ class UserServiceHandler:
                 )
 
         await self.__user_service_repo.add(user_services)
+
+    async def get_users_by_service(self, service_public_id: str) -> list[UserEntity]:
+        async with AsyncDatabaseSessionManager() as session:
+            users: list[UserEntity] = await self.user_service_repo(session).get_by_service_public_id(service_public_id)
+            return users

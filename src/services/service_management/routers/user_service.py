@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException, status, Depends
 
 from src.application.handler.user_service import UserServiceHandler
 from src.services.service_management.application.handlers.service import ServiceHandler
-from src.services.service_management.dependencies.dependencies import Dependencies
+from src.services.service_management.routers.dependencies.dependencies import Dependencies
 from src.services.service_management.schemas.requests.user_service import UserServicesDto
 from src.services.service_management.schemas.responses.service import ServiceAddedSuccessfully
 

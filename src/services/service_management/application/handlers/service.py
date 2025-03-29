@@ -1,4 +1,5 @@
 from src.infrastructure.db_manager.sql_alchemy.session import AsyncDatabaseSessionManager
+from src.services.account_management.domain.user import UserEntity
 from src.services.service_management.application.extensions.service import DtoToServiceEntity
 from src.services.service_management.infrastructure.repositories.service import IServiceRepository
 from kink import inject
@@ -32,8 +33,8 @@ class ServiceHandler:
         async with AsyncDatabaseSessionManager() as session:
             return await self.__service_repo.service_repo(session).get_bulk_services(parent_public_ids)
 
-    async def add_user_services(self, user_service_dto: UserServiceDto):
-        async with AsyncDatabaseSessionManager() as session:
+    def user_service_repo(self, session) -> IUserServiceRepository:
+        return self.__user_services_repo.user_service_repo(session)
 
-            return await self.__user_services_repo.user_service_repo(session).add(user_service_dto.public_user_id,
-                                                                                  user_service_dto.services_public_ids)
+    def service_repo(self, session) -> IServiceRepository:
+        return self.__service_repo.service_repo(session)
