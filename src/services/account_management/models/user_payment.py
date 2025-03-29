@@ -9,8 +9,8 @@ from .user import User
 
 class UserPayment(BaseModel):
     __tablename__ = 'user_payments'
-    id = Column(BigInteger, primary_key=True, autoincrement=True, nullable=False)
-    ref_id = Column(UUID(as_uuid=True), unique=True, primary_key=True, nullable=False, default=uuid.uuid4)
+    id = Column(BigInteger, primary_key=True, autoincrement=True, nullable=False, index=True)
+    ref_id = Column(UUID(as_uuid=True), unique=True, primary_key=True, nullable=False, default=uuid.uuid4, index=True)
     user_id: Mapped[int] = mapped_column(ForeignKey(User.id, ondelete="CASCADE"))
     payment_method = Column(String, nullable=False)
     is_archived = Column(Boolean, nullable=False, default=False)

@@ -9,8 +9,8 @@ from src.infrastructure.db_manager.sql_alchemy.base import BaseModel
 
 class User(BaseModel):
     __tablename__ = 'users'
-    id = Column(BigInteger, primary_key=True, autoincrement=True)
-    public_id = Column(UUID(as_uuid=True), unique=True, primary_key=True, nullable=False, default=uuid.uuid4)
+    id = Column(BigInteger, primary_key=True, autoincrement=True, index=True)
+    public_id = Column(UUID(as_uuid=True), unique=True, primary_key=True, nullable=False, default=uuid.uuid4, index=True)
     first_name = Column(String, nullable=False)
     last_name = Column(String, nullable=False)
     primary_email = Column(String, nullable=False)
