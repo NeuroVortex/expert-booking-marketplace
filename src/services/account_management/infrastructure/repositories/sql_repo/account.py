@@ -1,4 +1,4 @@
-from src.services.account_management.repositories.account import IAccountRepository
+from src.services.account_management.infrastructure.repositories.account import IAccountRepository
 
 
 class AccountRepository(IAccountRepository):

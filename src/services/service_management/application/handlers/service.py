@@ -1,12 +1,10 @@
 from src.infrastructure.db_manager.sql_alchemy.session import AsyncDatabaseSessionManager
-from src.services.account_management.domain.user import UserEntity
 from src.services.service_management.application.extensions.service import DtoToServiceEntity
 from src.services.service_management.infrastructure.repositories.service import IServiceRepository
 from kink import inject
 
 from src.services.service_management.infrastructure.repositories.user_service import IUserServiceRepository
 from src.services.service_management.schemas.requests.service import ServiceDto
-from src.services.service_management.schemas.requests.user_service import UserServiceDto
 
 
 @inject

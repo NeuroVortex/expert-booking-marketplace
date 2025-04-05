@@ -8,12 +8,12 @@ from .location import Location
 
 class Profile(NamedTuple):
     name: str
-    photo_path: str
-    headline: str
-    website: str
     location: Location
-    years_of_experience: int
-    bio: str
+    photo_path: str | None = None
+    headline: str | None = None
+    website: str | None = None
+    years_of_experience: int | None = None
+    bio: str | None = None
     experiences: list[Experience] | None = None
     certifications: list[Certificate] | None = None
     educations: list[Education] | None = None

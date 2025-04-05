@@ -12,7 +12,6 @@ class Dependencies:
     def __init__(self, logger: ICustomLogger):
         self.db_connection = None
         self.__logger = logger
-        self.__setup_repositories()
         self.__setup_dependencies()
         Dependencies.DependencyInjector = self
 
@@ -21,6 +20,3 @@ class Dependencies:
 
     def logger(self) -> ICustomLogger:
         return self.__logger
-
-    def __setup_repositories(self):
-        di[IServiceRepository] = SQLAlchemyServiceRepository

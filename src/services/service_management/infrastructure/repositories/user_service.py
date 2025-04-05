@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.services.account_management.domain.user import UserEntity
+from src.shared.account.user import UserEntity
 from src.services.service_management.domain.entities.service import ServiceEntity
 from src.services.service_management.domain.entities.user_service import UserServiceEntity
 

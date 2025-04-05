@@ -1,4 +1,4 @@
-from src.services.account_management.models.user import User
+from src.services.account_management.infrastructure.models.user import User
 from src.services.booking.domain.value_objects.address import Address
 from src.services.booking.domain.value_objects.reservation import Reservation
 from src.services.booking.routers.models.reservation import ReservationModel

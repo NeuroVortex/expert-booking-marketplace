@@ -6,10 +6,11 @@ from apscheduler.executors.pool import ThreadPoolExecutor, ProcessPoolExecutor
 from src.app.app_settings import AppSettings
 from src.app.config import Router
 from src.app.router.app import app_router
-from src.services.account_management.models.account import Account
-from src.services.account_management.models.user import User
-from src.services.account_management.models.user_address import UserAddress
-from src.services.account_management.models.user_payment import UserPayment
+from src.services.account_management.infrastructure.models.account import Account
+from src.services.account_management.infrastructure.models.user import User
+from src.services.account_management.infrastructure.models.user_address import UserAddress
+from src.services.account_management.infrastructure.models.user_payment import UserPayment
+from src.services.account_management.routers.users import user_router
 from src.services.booking.routers.appointment_routers import appointment_router
 
 from src.services.booking.models.reservation import Reservation
@@ -42,6 +43,7 @@ Registered_Models = [
 Routers = [
     Router(prefix="", router=app_router, tags=["/"]),
     Router(prefix='/v1/services', router=service_router, tags=["services"]),
+    Router(prefix='/v1/users', router=user_router, tags=["users"]),
     Router(prefix='/v1/user_services', router=user_service_router, tags=["user-services"]),
     Router(prefix='/v1/appointments', router=appointment_router, tags=["reservation"]),
 ]

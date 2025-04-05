@@ -5,7 +5,7 @@ from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, relationship, mapped_column
 
 from src.infrastructure.db_manager.sql_alchemy.base import BaseModel
-from src.services.account_management.models.user import User
+from src.services.account_management.infrastructure.models.user import User
 from src.services.service_management.infrastructure.models.services import Service
 
 

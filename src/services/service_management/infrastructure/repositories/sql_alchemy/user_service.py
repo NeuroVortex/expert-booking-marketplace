@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.application.extensions.user_service import UserServicesToModel
-from src.services.account_management.domain.user import UserEntity
+from src.shared.account.user import UserEntity
 from src.services.service_management.domain.entities.service import ServiceEntity
 from src.services.service_management.domain.entities.user_service import UserServiceEntity
 from src.services.service_management.infrastructure.repositories.user_service import IUserServiceRepository

@@ -3,8 +3,8 @@ from decimal import Decimal
 from kink import inject
 
 from src.infrastructure.db_manager.sql_alchemy.session import AsyncDatabaseSessionManager
-from src.services.account_management.domain.user import UserEntity
-from src.services.account_management.repositories.user import IUserRepository
+from src.shared.account.user import UserEntity
+from src.services.account_management.infrastructure.repositories.user import IUserRepository
 from src.services.service_management.application.handlers.service import ServiceHandler
 from src.services.service_management.domain.entities.service import ServiceEntity
 from src.services.service_management.domain.entities.user_service import UserServiceEntity

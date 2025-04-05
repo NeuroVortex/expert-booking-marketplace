@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from src.services.account_management.domain.user import UserEntity
+from src.shared.account.user import UserEntity
 from src.services.booking.domain.value_objects.address import Address
 from src.services.booking.domain.value_objects.reservation import Reservation
 

@@ -1,17 +1,18 @@
 from abc import ABC, abstractmethod
 
-from src.infrastructure.db_manager.db_management import AsyncDatabaseManager
-from src.services.account_management.domain.user import UserEntity
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from src.shared.account.user import UserEntity
 
 
 class IUserRepository(ABC):
 
     @abstractmethod
-    async def create(self, user):
+    async def create(self, user: UserEntity) -> str:
         raise NotImplementedError
 
     @abstractmethod
-    async def get(self, user):
+    async def remove(self, user_public_id: str) -> UserEntity:
         raise NotImplementedError
 
     @abstractmethod
@@ -35,9 +36,9 @@ class IUserRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    async def is_exist(self, user):
+    async def is_exist(self, user: UserEntity) -> bool:
         raise NotImplementedError
 
-    @abstractmethod
-    def user_repo(self, session: AsyncDatabaseManager) -> 'IUserRepository':
+    @classmethod
+    def user_repo(cls, session: AsyncSession) -> 'IUserRepository':
         raise NotImplementedError

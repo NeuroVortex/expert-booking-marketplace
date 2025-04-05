@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from src.services.account_management.domain.user import UserEntity
+from src.shared.account.user import UserEntity
 from src.services.service_management.domain.entities.service import ServiceEntity
 from src.services.service_management.domain.value_objects.user_service_detail import UserServiceDetail
 
