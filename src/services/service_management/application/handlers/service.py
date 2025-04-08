@@ -1,3 +1,5 @@
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from src.infrastructure.db_manager.sql_alchemy.session import AsyncDatabaseSessionManager
 from src.services.service_management.application.extensions.service import DtoToServiceEntity
 from src.services.service_management.infrastructure.repositories.service import IServiceRepository
@@ -26,10 +28,6 @@ class ServiceHandler:
     async def get_services(self, parent_public_id: str | None):
         async with AsyncDatabaseSessionManager() as session:
             return await self.__service_repo.service_repo(session).get_services(parent_public_id)
-
-    async def get_bulk_services(self, parent_public_ids: list[str]):
-        async with AsyncDatabaseSessionManager() as session:
-            return await self.__service_repo.service_repo(session).get_bulk_services(parent_public_ids)
 
     def user_service_repo(self, session) -> IUserServiceRepository:
         return self.__user_services_repo.user_service_repo(session)

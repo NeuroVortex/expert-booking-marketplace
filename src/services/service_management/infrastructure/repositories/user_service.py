@@ -18,11 +18,11 @@ class IUserServiceRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    async def get_by_service_public_id(self, public_id) -> list[UserEntity]:
+    async def get_users_by_service_public_id(self, service: ServiceEntity) -> list[UserEntity]:
         raise NotImplementedError
 
     @abstractmethod
-    async def get_by_user(self, user) -> list[ServiceEntity]:
+    async def get_by_user(self, user: UserEntity) -> list[ServiceEntity]:
         raise NotImplementedError
 
     @classmethod

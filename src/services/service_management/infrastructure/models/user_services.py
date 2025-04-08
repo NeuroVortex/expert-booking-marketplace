@@ -17,5 +17,5 @@ class UserService(BaseModel):
     service_id: Mapped[int] = mapped_column(ForeignKey(Service.id, ondelete="CASCADE"))
     details = Column(JSONB, nullable=False)
     creation_datetime = Column(TIMESTAMP, server_default=func.now())
-    user: Mapped["User"] = relationship("User", back_populates="user_services")
-    service: Mapped["Service"] = relationship("Service", back_populates="user_services")
+    user: Mapped["User"] = relationship("User", back_populates="user_services", lazy='joined')
+    service: Mapped["Service"] = relationship("Service", back_populates="user_services", lazy='joined')

@@ -6,4 +6,4 @@ class UserServicesToModel:
     def __rmatmul__(self, user_service: UserServiceEntity):
         return UserService(user_id=user_service.user.id,
                            service_id=user_service.service.id,
-                           details=user_service.detail._asdict())
+                           details=user_service.detail.to_dict())

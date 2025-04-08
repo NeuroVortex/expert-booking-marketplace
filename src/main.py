@@ -21,8 +21,6 @@ async def lifespan(fast_api_app: FastAPI):
 
     yield
 
-    Setup.shutdown_timer()
-
 app = FastAPI(lifespan=lifespan, docs_url="/swagger")
 app.add_middleware(CORSMiddleware,
                    allow_origins=Allowed_Origins,

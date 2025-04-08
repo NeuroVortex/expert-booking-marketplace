@@ -1,8 +1,6 @@
 from kink import di, inject
 
-from src.services.service_management.infrastructure.repositories.service import IServiceRepository
-from src.services.service_management.infrastructure.repositories.sql_alchemy.service import SQLAlchemyServiceRepository
-from src.shared.logger.logger_interface import ICustomLogger
+from src.application.logger.logger_interface import ICustomLogger
 
 
 @inject

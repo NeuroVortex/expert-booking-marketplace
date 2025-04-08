@@ -1,5 +1,6 @@
 from kink import di
 
+from src.application.logger.logger_interface import ICustomLogger
 from src.services.account_management.infrastructure.repositories.sql_repo.user import SqlAlchemyUserRepository
 from src.services.account_management.infrastructure.repositories.user import IUserRepository
 from src.services.service_management.infrastructure.repositories.service import IServiceRepository
@@ -7,8 +8,7 @@ from src.services.service_management.infrastructure.repositories.sql_alchemy.ser
 from src.services.service_management.infrastructure.repositories.sql_alchemy.user_service import \
     SQLAlchemyUserServiceRepository
 from src.services.service_management.infrastructure.repositories.user_service import IUserServiceRepository
-from src.shared.logger.advanced_logger import AdvancedLogger
-from src.shared.logger.logger_interface import ICustomLogger
+from src.application.logger.advanced_logger import AdvancedLogger
 
 
 class Bootstrap:

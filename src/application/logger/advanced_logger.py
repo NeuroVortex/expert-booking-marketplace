@@ -3,7 +3,7 @@ import uuid
 from typing import Type
 
 from src.app.app_settings import AppSettings
-from src.shared.logger.logger_interface import ICustomLogger
+from src.application.logger.logger_interface import ICustomLogger
 from advancedLogger import AdvancedLogHandler, AdvancedLogFormatter
 
 

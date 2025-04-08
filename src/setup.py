@@ -6,22 +6,18 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from fastapi import FastAPI
 from kink import inject
 
-from src.agents.actor_system import ActorSystem
 from src.app.app_settings import AppSettings
-from src.application.time.timer import Timer
+from src.application.logger.logger_interface import ICustomLogger
 from src.infrastructure.db_manager.db_checker import DBChecking
 from src.application.dependencies.dependencies import Dependencies
 from src.settings import Registered_Models, Routers, DECIMAL_PRECISION, DECIMAL_ROUNDING, EXECUTORS, JOB_DEFAULTS
 from src.infrastructure.db_manager.db_management import AsyncDatabaseManager
-from src.shared.logger.logger_interface import ICustomLogger
 
 
 @inject
 class Setup:
     db_manager: AsyncDatabaseManager | None = None
-    actor_system: ActorSystem = None
     time_scheduler: AsyncIOScheduler = None
-    timer: Timer = None
     loop: asyncio.AbstractEventLoop = None
 
     def __init__(self, logger: ICustomLogger, app: FastAPI, debug=False):
@@ -38,16 +34,6 @@ class Setup:
     def __setup_logger(self):
         self.__configure_logging()
         self.__logger = Dependencies.DependencyInjector.logger()
-
-    @classmethod
-    def __setup_timer(cls):
-        Setup.time_scheduler = AsyncIOScheduler(executors=EXECUTORS, job_defaults=JOB_DEFAULTS)
-        Setup.timer = Timer(scheduler=Setup.time_scheduler)
-        Setup.time_scheduler.start()
-
-    @classmethod
-    def shutdown_timer(cls):
-        Setup.timer.shutdown()
 
     async def configure_db(self):
         Setup.db_manager = AsyncDatabaseManager(AppSettings.CREDENTIALS["databases"]["main"]["connection"])
@@ -83,10 +69,6 @@ class Setup:
 
     def __run(self):
         self.__setup_async_loop()
-        self.__setup_timer()
-        Setup.actor_system = ActorSystem(initial_actor=Manager, event_loop=Setup.loop, timer=Setup.timer)
-        Setup.actor_system.start()
-        Setup.consumer.start()
 
     @property
     def db_models(self):

@@ -1,11 +1,12 @@
 from fastapi import APIRouter, HTTPException, status, Depends
 
 from src.infrastructure.exceptions.db_exceptions import DoesNotExist
+from src.schema.extensions.user import ToGetUser
+from src.schema.user import GetUser
 from src.services.account_management.application.exceptions.user import UserExistException
 from src.services.account_management.application.handler.user import UserHandler
 from src.services.account_management.routers.dependencies.dependencies import Dependencies
-from src.services.account_management.schemas.extensions.user import ToGetUser
-from src.services.account_management.schemas.responses.user import UserAddedSuccessfully, GetUser, \
+from src.services.account_management.schemas.responses.user import UserAddedSuccessfully, \
     UserDeletedSuccessfully, UserDeletedUnSuccessfully
 from src.services.account_management.schemas.user import UserDto
 from src.shared.account.user import UserEntity
