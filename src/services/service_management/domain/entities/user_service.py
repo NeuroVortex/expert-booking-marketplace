@@ -11,3 +11,4 @@ class UserServiceEntity:
     service: ServiceEntity
     detail: UserServiceDetail
     id: int | None = None
+    public_id: str | None = None

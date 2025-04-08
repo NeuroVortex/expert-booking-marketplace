@@ -12,4 +12,7 @@ class UserServicesDto(BaseModel):
     public_user_id: str
     services: List[UserServiceDto]
 
+class UnassignUserServices(BaseModel):
+    public_user_id: str
+    services_public_ids: List[str]
 

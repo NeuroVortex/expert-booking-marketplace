@@ -14,7 +14,11 @@ class IUserServiceRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    async def remove(self, user_id, public_service_id):
+    async def remove(self, user: UserEntity, services: list[ServiceEntity]):
+        raise NotImplementedError
+
+    @abstractmethod
+    async def get(self, user_services_public_ids: list[str]) -> list[UserServiceEntity]:
         raise NotImplementedError
 
     @abstractmethod

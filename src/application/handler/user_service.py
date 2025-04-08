@@ -45,6 +45,12 @@ class UserServiceHandler:
 
         await self.__user_service_repo.user_service_repo(session).add(user_services)
 
+    async def get_user_services(self, user_service_public_id: list[str]) -> list[UserServiceEntity]:
+        async with AsyncDatabaseSessionManager() as session:
+            user_services: list[UserServiceEntity] = await self.__user_service_repo.user_service_repo(session).get(
+                user_service_public_id)
+            return user_services
+
     async def get_services_by_user(self, user_public_id: str) -> list[ServiceEntity]:
         async with AsyncDatabaseSessionManager() as session:
             user: UserEntity = await self.__user_repo.user_repo(session).get_by_user_public_id(user_public_id)
@@ -57,3 +63,10 @@ class UserServiceHandler:
             users: list[UserEntity] = await self.__user_service_repo.user_service_repo(
                 session).get_users_by_service_public_id(service)
             return users
+
+    async def unassigned_services(self, user_public_id: str, services_public_ids: list[str]):
+        async with AsyncDatabaseSessionManager() as session:
+            user: UserEntity = await self.__user_repo.user_repo(session).get_by_user_public_id(user_public_id)
+            services: list[ServiceEntity] = await self.__service_repo.service_repo(session).get_bulk_services(
+                services_public_ids)
+            await self.__user_service_repo.user_service_repo(session).remove(user, services)
