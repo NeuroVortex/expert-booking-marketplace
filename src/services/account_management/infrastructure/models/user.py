@@ -28,3 +28,4 @@ class User(BaseModel):
     user_services = relationship("UserService", back_populates='user')
     user_addresses = relationship("UserAddress", back_populates='user')
     reservations = relationship("Reservation", back_populates='service_provider')
+    time_slots = relationship("TimeSlot", back_populates='user')

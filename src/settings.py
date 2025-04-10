@@ -11,9 +11,10 @@ from src.services.account_management.infrastructure.models.user import User
 from src.services.account_management.infrastructure.models.user_address import UserAddress
 from src.services.account_management.infrastructure.models.user_payment import UserPayment
 from src.services.account_management.routers.users import user_router
+from src.services.booking.infrastructure.models.reservation import Reservation
+from src.services.booking.infrastructure.models.time import TimeSlot
 from src.services.booking.routers.appointment_routers import appointment_router
 
-from src.services.booking.models.reservation import Reservation
 from src.services.service_management.routers.service import service_router
 from src.services.service_management.infrastructure.models.services import Service
 from src.services.service_management.infrastructure.models.user_services import UserService
@@ -37,7 +38,8 @@ Registered_Models = [
     Reservation,
     Account,
     Service,
-    UserService
+    UserService,
+    TimeSlot
 ]
 
 Routers = [

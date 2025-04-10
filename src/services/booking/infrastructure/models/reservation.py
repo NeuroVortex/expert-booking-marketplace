@@ -7,14 +7,16 @@ from sqlalchemy.orm import Mapped, relationship, mapped_column
 from src.infrastructure.db_manager.sql_alchemy.base import BaseModel
 from src.services.account_management.infrastructure.models.user import User
 from src.services.account_management.infrastructure.models.user_address import UserAddress
+from src.services.booking.infrastructure.models.time import TimeSlot
 
 
 class Reservation(BaseModel):
     __tablename__ = 'reservations'
-    id = Column(BigInteger, primary_key=True, autoincrement=True, nullable=False, index=True)
+    id = Column(BigInteger, primary_key=True, unique=True, autoincrement=True, nullable=False, index=True)
     public_id = Column(UUID(as_uuid=False), primary_key=True, unique=True, default=uuid.uuid4, nullable=False, index=True)
     user_address_id: Mapped[int] = mapped_column(ForeignKey(UserAddress.id, ondelete="CASCADE"))
     service_provider_id: Mapped[int] = mapped_column(ForeignKey(User.id, ondelete="CASCADE"))
+    time_slot_id = mapped_column(ForeignKey(TimeSlot.id, ondelete="CASCADE"), nullable=False)
     state = Column(String, nullable=False)
     detail = Column(JSONB, nullable=False)
     procedure = Column(JSONB, nullable=False)
@@ -23,5 +25,6 @@ class Reservation(BaseModel):
     creation_datetime = Column(TIMESTAMP, server_default=func.now())
     update_datetime = Column(TIMESTAMP, server_default=func.now(), onupdate=func.now())
 
+    time_slot = relationship("TimeSlot", back_populates="reservation")
     user_addresses: Mapped["UserAddress"] = relationship("UserAddress", back_populates="reservations")
     service_provider: Mapped["User"] = relationship("User", back_populates="reservations")
