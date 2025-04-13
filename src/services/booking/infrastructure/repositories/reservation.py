@@ -5,7 +5,7 @@ from src.services.booking.domain.state import ReservationState
 from src.shared.account.user import UserEntity
 
 
-class Reservation(ABC):
+class IReservationRepository(ABC):
 
     @abstractmethod
     async def create(self, appointment: AppointmentEntity):
@@ -25,4 +25,8 @@ class Reservation(ABC):
 
     @abstractmethod
     async def delete(self, reservation):
+        raise NotImplementedError
+
+    @classmethod
+    def reservation_repo(cls, session) -> 'IReservationRepository':
         raise NotImplementedError

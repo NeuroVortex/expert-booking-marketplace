@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class IUserAddressRepository(ABC):
+class IUserPaymentRepository(ABC):
 
     @abstractmethod
     def create(self, user, payment):

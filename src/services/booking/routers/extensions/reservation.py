@@ -1,20 +1,12 @@
 from src.services.account_management.infrastructure.models.user import User
 from src.services.booking.domain.address import Address
 from src.services.booking.domain.reservation import Reservation
-from src.services.booking.routers.models.reservation import ReservationModel
 from src.services.booking.routers.responses.response import Appointment
-from src.services.service_management.domain.entities.service import ServiceEntity
-from src.services.service_management.schemas.requests.service import ServiceDto
+from src.services.booking.schema.reservation import ReservationDto
 
 
-class ToServiceDto:
-    def __rmatmul__(self, entity: ServiceEntity):
-        return ServiceDto(name=entity.name,
-                          description=entity.details.description,
-                          parent_service_id=entity.parent_service_id)
-
-class ToReservationDto:
-    def __rmatmul__(self, appointment: ReservationModel):
+class DtoToReservationEntity:
+    def __rmatmul__(self, appointment: ReservationDto):
         return Appointment(selected_services=appointment.selectedServices,
                               description=appointment.description,
                               client=User(first_name=appointment.client.name,

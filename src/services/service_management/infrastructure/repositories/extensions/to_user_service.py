@@ -1,4 +1,4 @@
-from src.services.account_management.infrastructure.repositories.extensions.user_model import ToUser
+from src.services.account_management.infrastructure.repositories.extensions.user import ToUser
 from src.services.service_management.domain.entities.user_service import UserServiceEntity
 from src.services.service_management.domain.value_objects.user_service_detail import UserServiceDetail
 from src.services.service_management.infrastructure.models.user_services import UserService

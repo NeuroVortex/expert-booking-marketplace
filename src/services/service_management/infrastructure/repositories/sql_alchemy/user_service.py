@@ -3,7 +3,7 @@ from sqlalchemy import and_
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.application.extensions.user_service import UserServicesToModel
-from src.services.account_management.infrastructure.repositories.extensions.user_model import ToUser
+from src.services.account_management.infrastructure.repositories.extensions.user import ToUser
 from src.services.service_management.infrastructure.models.user_services import UserService
 from src.services.service_management.infrastructure.repositories.extensions.to_service import ModelToServiceEntity
 from src.services.service_management.infrastructure.repositories.extensions.to_user_service import \

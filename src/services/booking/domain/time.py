@@ -15,3 +15,15 @@ class TimeSlotEntity:
     id: int | None = None
     public_id: str | None = None
     is_booked:bool = False
+
+    def __eq__(self, slot: 'TimeSlotEntity') -> bool:
+        if self.date != slot.date:
+            return False
+
+        if slot.start_time >= self.end_time:
+            return False
+
+        if slot.end_time <= self.start_time:
+            return False
+
+        return True

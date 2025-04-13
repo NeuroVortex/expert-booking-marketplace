@@ -4,7 +4,7 @@ from sqlalchemy.exc import NoResultFound
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.infrastructure.exceptions.db_exceptions import DoesNotExist
-from src.services.account_management.infrastructure.repositories.extensions.user_model import ToUserModel, ToUser
+from src.services.account_management.infrastructure.repositories.extensions.user import ToUserModel, ToUser
 from src.services.account_management.infrastructure.models.user import User
 from src.services.account_management.infrastructure.repositories.user import IUserRepository
 from src.shared.account.user import UserEntity
