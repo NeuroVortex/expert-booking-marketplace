@@ -1,5 +1,5 @@
-# CRM Chatbot
-CRM Chatbot is a FastAPI-based commercial chatbot application that interacts with clients and records their requests on 
+# Booking Service
+Booking service is a FastAPI-based commercial chatbot application that interacts with clients and records their requests on 
 different types of messengers (e.g., Meta messenger, Telegram Messenger, etc.)
 
 At first, it will be designed to operate on Meta's Messenger.
