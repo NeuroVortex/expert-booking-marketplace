@@ -1,4 +1,4 @@
-# Booking Service
+# Expert Booking Marketplace Integrated with Chatbot
 Booking service is a FastAPI-based commercial chatbot application that interacts with clients and records their requests on 
 different types of messengers (e.g., Meta messenger, Telegram Messenger, etc.)
 
